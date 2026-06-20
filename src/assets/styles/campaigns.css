@@ -1,0 +1,422 @@
+/* =======================================================
+   RESET
+======================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f5f5f5;
+  overflow-x: hidden;
+}
+
+/* =======================================================
+   NAVBAR (GIỐNG STAFF.CSS)
+======================================================= */
+
+.admin-navbar {
+  min-height: 70px;
+  background: #7b001f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 30px;
+  flex-wrap: wrap;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.nav-left h2 {
+  color: white;
+  line-height: 1.1;
+}
+
+.nav-left a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.nav-left a:hover {
+  opacity: 0.8;
+}
+
+.nav-left a.active {
+  border-bottom: 2px solid gold;
+}
+
+/* =======================================================
+   AVATAR
+======================================================= */
+
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+/* =======================================================
+   DROPDOWN
+======================================================= */
+
+.profile-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 60px;
+  width: 180px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  display: none;
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+  background: #f3f3f3;
+}
+
+/* =======================================================
+   MAIN LAYOUT (GIỐNG STAFF.CSS GRID)
+======================================================= */
+
+.campaigns-container {
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+/* =======================================================
+   CARD STYLE (GIỐNG STAFF.CSS)
+======================================================= */
+
+.form-section,
+.table-section {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  width: 100%;
+}
+
+.form-section h2,
+.table-section h2 {
+  margin-bottom: 20px;
+}
+
+/* =======================================================
+   INPUTS
+======================================================= */
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.input-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+  border-color: #7b001f;
+  box-shadow: 0 0 0 3px rgba(123,0,31,0.1);
+}
+
+/* =======================================================
+   DOCK DYNAMIC SELECTION & MULTI-SELECT FIELDS
+======================================================= */
+
+.conditional-fields {
+  display: none;
+  margin-top: 15px;
+  padding: 15px;
+  border-left: 3px solid #7b001f;
+  background: #fdfdfd;
+  border-radius: 0 10px 10px 0;
+}
+
+.multiselect-container {
+  border: 1px solid #ccc;
+  overflow-y: auto;
+  padding: 10px;
+  border-radius: 10px;
+  background: #fff;
+  max-height: 150px;
+}
+
+.multiselect-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.multiselect-item:last-child {
+  margin-bottom: 0;
+}
+
+.multiselect-item input[type="checkbox"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: #7b001f;
+}
+
+.flex-row {
+  display: flex;
+  gap: 15px;
+}
+
+.flex-row .input-group {
+  flex: 1;
+}
+
+.sub-wrapper {
+  display: none;
+  margin-top: 12px;
+}
+
+.campaign-sub-heading {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 15px 0 8px 0;
+  padding-bottom: 4px;
+  border-bottom: 1px dashed #ddd;
+}
+
+/* =======================================================
+   CHECKBOX
+======================================================= */
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* =======================================================
+   BUTTON (GIỐNG STAFF.CSS)
+======================================================= */
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #7b001f;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* =======================================================
+   TABLE
+======================================================= */
+
+.table-section {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+th,
+td {
+  padding: 14px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  font-size: 14px;
+}
+
+th {
+  background: #fafafa;
+  font-weight: 700;
+}
+
+/* =======================================================
+   BANNER IMAGE
+======================================================= */
+
+.banner-image {
+  width: 120px;
+  height: 70px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* =======================================================
+   ACTION BUTTONS (GIỐNG STAFF)
+======================================================= */
+
+.edit-btn,
+.delete-btn {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  width: auto;
+  min-width: 70px;
+  transition: 0.2s;
+}
+
+.edit-btn {
+  background: #1e88e5;
+}
+
+.delete-btn {
+  background: #e53935;
+}
+
+/* =======================================================
+   RESPONSIVE - TABLET
+======================================================= */
+
+@media (max-width: 1100px) {
+  .campaigns-container {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+}
+
+/* =======================================================
+   RESPONSIVE - MOBILE
+======================================================= */
+
+@media (max-width: 768px) {
+  .admin-navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .campaigns-container {
+    padding: 15px;
+    gap: 20px;
+  }
+
+  .form-section,
+  .table-section {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    width: 100%;
+  }
+  
+  .flex-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+/* =======================================================
+   SMALL MOBILE
+======================================================= */
+
+@media (max-width: 480px) {
+  .admin-navbar {
+    padding: 15px;
+  }
+
+  .form-section,
+  .table-section {
+    padding: 15px;
+  }
+
+  .banner-image {
+    width: 90px;
+    height: 55px;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    width: 100%;
+  }
+}

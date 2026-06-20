@@ -1,0 +1,428 @@
+/* =======================================================
+   RESET & BASE STYLES
+======================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f8f9fa;
+  overflow-x: hidden;
+  color: #333;
+}
+
+/* =======================================================
+   NAVBAR
+======================================================= */
+.admin-navbar {
+  min-height: 70px;
+  background: #7b001f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 30px;
+  flex-wrap: wrap;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.nav-left h2 {
+  color: white;
+  line-height: 1.1;
+}
+
+.nav-left a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.nav-left a:hover {
+  opacity: 0.8;
+}
+
+.nav-left a.active {
+  border-bottom: 2px solid gold;
+}
+
+/* =======================================================
+   AVATAR & DROPDOWN
+======================================================= */
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+.profile-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 60px;
+  width: 180px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  display: none;
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+  background: #f3f3f3;
+}
+
+/* =======================================================
+   MAIN LAYOUT STUCTURE
+======================================================= */
+.staff-container {
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.left-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* =======================================================
+   CARDS & SECTIONS
+======================================================= */
+.form-section,
+.table-section,
+.violation-lookup-section {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+  width: 100%;
+}
+
+.form-section h2,
+.table-section h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #7b001f;
+}
+
+/* =======================================================
+   INPUT & FORMS DESIGN
+======================================================= */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+  background-color: #fafafa;
+}
+
+.input-group textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+  border-color: #7b001f;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(123,0,31,0.1);
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #7b001f;
+}
+
+.checkbox-group label {
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+form button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #7b001f;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+form button[type="submit"]:hover {
+  background: #5d0017;
+}
+
+/* =======================================================
+   VIOLATION BAREM PANEL
+======================================================= */
+.violation-lookup-section {
+  border-left: 5px solid #ffc107;
+}
+
+.violation-lookup-section h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #856404;
+  margin-bottom: 12px;
+}
+
+.violation-rules-list {
+  list-style: none;
+}
+
+.violation-rules-list li {
+  font-size: 13px;
+  padding: 8px 0;
+  border-bottom: 1px dashed #eee;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.violation-rules-list li:last-child {
+  border-bottom: none;
+}
+
+.penalty-text {
+  color: #dc3545;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* =======================================================
+   TABLE DESIGN
+======================================================= */
+.table-section {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1100px;
+}
+
+th, td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+th {
+  background: #f8f9fa;
+  font-weight: 700;
+  color: #555;
+}
+
+/* Meta Data Cells */
+.staff-meta-name {
+  font-weight: 600;
+  color: #111;
+}
+
+.staff-meta-email {
+  font-size: 12px;
+  color: #777;
+  margin-top: 2px;
+}
+
+.staff-avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #eee;
+}
+
+.violation-note-cell {
+  font-size: 12px;
+  max-width: 180px;
+  white-space: pre-line;
+  color: #555;
+}
+
+/* =======================================================
+   BADGES & TRẠNG THÁI CHẤM CÔNG
+======================================================= */
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.bg-receptionist { background-color: #6f42c1; }
+.bg-barista { background-color: #fd7e14; }
+.bg-cashier { background-color: #198754; }
+.bg-manager { background-color: #0dcaf0; color: #000; }
+.bg-staff { background-color: #6c757d; }
+
+.status-active { color: #198754; font-weight: 600; }
+.status-disabled { color: #dc3545; font-weight: 600; }
+
+/* Khu vực điểm danh */
+.attendance-control {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.attendance-status-label {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-align: center;
+  width: fit-content;
+}
+
+.status-uncheck { background: #e2e3e5; color: #383d41; }
+.status-present { background: #d1e7dd; color: #0f5132; }
+.status-leave { background: #fff3cd; color: #664d03; }
+
+.admin-change-attendance {
+  font-size: 11px;
+  padding: 4px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  cursor: pointer;
+  background: white;
+}
+
+/* Trạng thái lương */
+.paid-badge {
+  font-size: 12px;
+  font-weight: 600;
+}
+.paid-badge.paid { color: #198754; }
+.paid-badge.unpaid { color: #dc3545; }
+
+/* UTILS CLASS */
+.text-center { text-align: center; }
+.font-bold { font-weight: 700; }
+.text-danger { color: #dc3545; }
+.text-success { color: #198754; }
+.text-dark { color: #111; }
+.text-muted { color: #999; font-style: italic; }
+
+/* =======================================================
+   ACTION BUTTONS
+======================================================= */
+.action-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.edit-btn, .delete-btn {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.edit-btn { background: #0d6efd; }
+.edit-btn:hover { background: #0b5ed7; }
+.delete-btn { background: #dc3545; }
+.delete-btn:hover { background: #bb2d3b; }
+
+/* =======================================================
+   RESPONSIVE LAYOUT
+======================================================= */
+@media (max-width: 1200px) {
+  .staff-container {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .nav-left { width: 100%; }
+  .nav-right { width: 100%; display: flex; justify-content: flex-end; }
+}

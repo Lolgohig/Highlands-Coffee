@@ -1,0 +1,201 @@
+/* =======================================================
+   RESET
+======================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #f5f5f5;
+  overflow-x: hidden;
+}
+
+/* =======================================================
+   NAVBAR (ĐỒNG BỘ HOÀN TOÀN VỚI CATEGORIES.CSS)
+======================================================= */
+.admin-navbar {
+  min-height: 70px;
+  background: #7b001f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 30px;
+  flex-wrap: wrap;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.nav-left h2 {
+  color: white;
+  line-height: 1.1;
+}
+
+.nav-left a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.nav-left a:hover {
+  opacity: 0.8;
+}
+
+.nav-left a.active {
+  border-bottom: 2px solid gold;
+}
+
+/* =======================================================
+   AVATAR (ĐỒNG BỘ)
+======================================================= */
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+/* =======================================================
+   DROPDOWN (ĐỒNG BỘ)
+======================================================= */
+.profile-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 60px;
+  background: white;
+  width: 180px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: none;
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: black;
+  text-decoration: none;
+  display: block;
+  transition: 0.2s;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+  background: #f3f3f3;
+}
+
+/* =======================================================
+   LAYOUT RIÊNG CỦA NEWS (GIỮ NGUYÊN)
+======================================================= */
+.categories-container {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* CARDS */
+.form-section,
+.table-section {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* INPUTS */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+.input-group label {
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+}
+.input-group textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+/* BUTTONS */
+.form-section button {
+  padding: 14px 30px;
+  border: none;
+  border-radius: 12px;
+  background: #7b001f;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+.edit-btn,
+.delete-btn {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  margin-right: 5px;
+}
+.edit-btn {
+  background: #1e88e5;
+}
+.delete-btn {
+  background: #e53935;
+}
+
+/* TABLE */
+.table-section {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+th,
+td {
+  padding: 14px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+.news-image {
+  width: 100px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}

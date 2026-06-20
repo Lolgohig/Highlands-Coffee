@@ -1,0 +1,381 @@
+/* =======================================================
+   RESET (ĐỒNG BỘ STAFF.CSS / ORDERS.CSS)
+======================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f5f5f5;
+  overflow-x: hidden;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* =======================================================
+   NAVBAR (ĐỒNG BỘ TOÀN SITE ADMIN 100%)
+======================================================= */
+
+.admin-navbar {
+  min-height: 70px;
+  background: #7b001f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 30px;
+  flex-wrap: wrap;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.nav-left h2 {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.nav-left a {
+  color: white;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.nav-left a:hover {
+  opacity: 0.8;
+}
+
+.nav-left a.active {
+  border-bottom: 2px solid gold;
+}
+
+/* =======================================================
+   AVATAR
+======================================================= */
+
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+/* =======================================================
+   DROPDOWN
+======================================================= */
+
+.profile-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 60px;
+  width: 180px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  display: none;
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+  background: #f3f3f3;
+}
+
+/* =======================================================
+   MAIN CONTAINER
+======================================================= */
+
+.dashboard-container {
+  padding: 30px;
+}
+
+.dashboard-container h1 {
+  margin-bottom: 25px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #222;
+}
+
+/* =======================================================
+   STATS GRID (TỐI ƯU CHIA THÀNH 5 CỘT TRÊN PC)
+======================================================= */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 20px;
+  padding: 22px 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-card h3 {
+  margin-bottom: 10px;
+  color: #666;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.stat-card p {
+  font-size: 26px;
+  font-weight: 700;
+  color: #7b001f;
+}
+
+/* =======================================================
+   RECENT SECTION
+======================================================= */
+
+.recent-section {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  overflow-x: auto;
+}
+
+.section-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* =======================================================
+   TABLE DESIGN & HIERARCHY BADGES
+======================================================= */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+th,
+td {
+  padding: 14px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 15px;
+}
+
+th {
+  background: #fafafa;
+  font-weight: 700;
+  color: #555;
+}
+
+td img {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #eaeaea;
+}
+
+.product-price-text {
+  font-weight: 600;
+  color: #7b001f;
+}
+
+/* DESIGN CHO DANH MỤC PHÂN CẤP (SUB-CATEGORIES) */
+.category-hierarchy-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.main-cat-badge {
+  background: #fdf2f4;
+  color: #7b001f;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.cat-arrow {
+  color: #aaa;
+  font-weight: bold;
+}
+
+.sub-cat-badge {
+  background: #eef5fc;
+  color: #1e88e5;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* =======================================================
+   RESPONSIVE - TABLET
+======================================================= */
+
+@media (max-width: 1200px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-container {
+    padding: 20px;
+  }
+
+  .admin-navbar {
+    align-items: flex-start;
+    padding: 20px;
+  }
+}
+
+/* =======================================================
+   RESPONSIVE - MOBILE
+======================================================= */
+
+@media (max-width: 768px) {
+  .admin-navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .nav-left {
+    width: 100%;
+    gap: 12px;
+  }
+
+  .nav-left h2 {
+    width: 100%;
+    font-size: 22px;
+  }
+
+  .nav-left a {
+    font-size: 14px;
+  }
+
+  .nav-right {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .dashboard-container {
+    padding: 15px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .stat-card,
+  .recent-section {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .stat-card p {
+    font-size: 24px;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  td img {
+    width: 55px;
+    height: 55px;
+  }
+}
+
+/* =======================================================
+   RESPONSIVE - SMALL MOBILE
+======================================================= */
+
+@media (max-width: 480px) {
+  .admin-navbar {
+    padding: 15px;
+  }
+
+  .nav-left h2 {
+    font-size: 20px;
+  }
+
+  .nav-left a {
+    font-size: 13px;
+  }
+
+  .dashboard-container {
+    padding: 10px;
+  }
+
+  .stat-card,
+  .recent-section {
+    padding: 15px;
+  }
+
+  th,
+  td {
+    font-size: 13px;
+  }
+}

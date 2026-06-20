@@ -1,0 +1,136 @@
+.nav-link:hover {
+  color: #f5c16c;
+}
+
+/* =======================================================
+   GENERAL & LAYOUT
+======================================================= */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.detail-container {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* =======================================================
+   CONTENT STYLING
+======================================================= */
+#news-title {
+    font-size: 36px;
+    color: #6f4e37; /* Nâu cà phê */
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#news-date {
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+#news-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+#news-body {
+    line-height: 1.8;
+    font-size: 16px;
+    color: #444;
+}
+#news-body {
+    white-space: pre-line; /* Tự động xuống dòng theo dữ liệu gốc */
+    line-height: 1.8;
+}
+
+/* =======================================================
+   BACK BUTTON (GIỮA, HOVER ĐỎ)
+======================================================= */
+.back-btn {
+    display: block;
+    margin: 40px auto;
+    padding: 12px 40px;
+    background: #fff;
+    border: 1px solid #6f4e37;
+    color: #6f4e37;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.back-btn:hover {
+    background-color: #e30000; /* Đỏ Highlands */
+    color: #fff;
+    border-color: #e30000;
+}
+
+/* =======================================================
+   RELATED NEWS (TIN TỨC KHÁC)
+======================================================= */
+/* Style cho danh sách tin khác dạng text */
+.related-news {
+    margin-top: 60px;
+    border-top: 2px solid #eee;
+    padding-top: 30px;
+}
+
+.related-news h2 {
+    color: #6f4e37; /* Màu nâu */
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+.related-item-text {
+    display: flex;
+    justify-content: space-between; /* Đẩy ngày tháng sang bên phải */
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.related-item-text span {
+    font-weight: 500;
+}
+
+.related-item-text small {
+    color: #888;
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+/* Hiệu ứng hover */
+.related-item-text:hover {
+    color: #e30000; /* Đỏ khi lia vào */
+    padding-left: 10px; /* Hiệu ứng dịch nhẹ sang phải */
+}
+
+/* Scroll Reveal */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.6s;
+}
+
+.scroll-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}

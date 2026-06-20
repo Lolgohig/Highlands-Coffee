@@ -1,0 +1,82 @@
+/* =======================================================
+   NAVBAR & UTILS
+======================================================= */
+.nav-link.active {
+  color: #f5c16c !important;
+}
+.nav-link:hover {
+  color: #f5c16c;
+}
+/* news.css */
+.news-page-container { 
+    max-width: 1200px; 
+    margin: 40px auto; 
+    padding: 0 20px; 
+    min-height: 60vh; 
+}
+.news-main-title { 
+    font-size: 32px; 
+    text-align: center; 
+    margin-bottom: 50px; 
+    color: #333;
+}
+.news-grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px; 
+}
+.news-card { 
+    display: block; /* Quan trọng: giúp thẻ a nhận kích thước */
+    text-decoration: none; 
+    color: #333; 
+    transition: 0.3s; 
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.img-wrapper { 
+    width: 100%;
+    height: 250px;
+    overflow: hidden; 
+}
+.img-wrapper img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    transition: 0.5s; 
+}
+.news-card:hover img { transform: scale(1.05); }
+.news-card h3 { 
+    margin: 15px; 
+    font-size: 18px; 
+    line-height: 1.4;
+}
+.news-card:hover h3 {
+    color: #e30000; /* Màu đỏ của Highlands Coffee */
+    transition: color 0.3s ease; /* Tạo hiệu ứng chuyển màu mượt mà */
+}
+.news-card p { 
+    margin: 0 15px 15px; 
+    color: #888; 
+    font-size: 14px; 
+}
+/* Scroll Reveal */
+.scroll-reveal { opacity: 0; transform: translateY(30px); transition: 0.6s; }
+.scroll-reveal.active { opacity: 1; transform: translateY(0); }
+
+.load-more-btn {
+    display: block;
+    margin: 40px auto;
+    padding: 12px 40px;
+    background: white;
+    color: #7b001f; /* Màu đỏ thương hiệu của bạn */
+    border: 2px solid #7b001f;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.load-more-btn:hover {
+    background: #7b001f;
+    color: white;
+}
