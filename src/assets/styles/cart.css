@@ -1,0 +1,404 @@
+/* ==========================================================================
+   CẤU TRÚC GIAO DIỆN KHU VỰC THÀNH PHẦN CART
+   ========================================================================== */
+   .cart-page-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    min-height: 65vh;
+  }
+  
+  .cart-grid-layout {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 35px;
+  }
+  
+  .cart-card-form {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f1f1f1;
+  }
+  .margin-top-box {
+    margin-top: 25px;
+  }
+  
+  .cart-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #b22830;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ebdcb9;
+    text-transform: uppercase;
+  }
+  .cart-section-title i {
+    margin-right: 8px;
+  }
+  
+  .cart-subsection-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #53382c;
+    margin-bottom: 12px;
+  }
+  
+  /* INPUT COMPONENT CLASSES */
+  .cart-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .cart-form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #495057;
+  }
+  .cart-form-group input[type="text"],
+  .cart-form-group input[type="date"],
+  .cart-form-group input[type="time"] {
+    padding: 11px 14px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    background-color: #ffffff;
+    color: #212529;
+    transition: border-color 0.2s;
+  }
+  .cart-form-group input:focus {
+    border-color: #b22830;
+  }
+  .cart-form-group input[readonly] {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+  }
+  
+  /* CẤU TRÚC RADIO SELECTION MỚI */
+  .delivery-option-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .radio-label-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #212529;
+    user-select: none;
+    gap: 8px;
+  }
+  .radio-label-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .custom-radio-mark {
+    height: 18px;
+    width: 18px;
+    background-color: #fff;
+    border: 2px solid #ced4da;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+  }
+  .radio-label-container:hover input ~ .custom-radio-mark {
+    border-color: #b22830;
+  }
+  .radio-label-container input:checked ~ .custom-radio-mark {
+    background-color: #b22830;
+    border-color: #b22830;
+  }
+  .custom-radio-mark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    top: 4px;
+    left: 4px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+  }
+  .radio-label-container input:checked ~ .custom-radio-mark:after {
+    display: block;
+  }
+  
+  .cart-datetime-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 10px;
+    background-color: #fdfcf9;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px dashed #ebdcb9;
+  }
+  
+  /* COUPON STYLES */
+  .campaign-input-group {
+    display: flex;
+    gap: 10px;
+  }
+  .campaign-input-group input {
+    flex: 1;
+    padding: 11px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+  }
+  .campaign-input-group button {
+    padding: 0 20px;
+    background-color: #53382c;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .campaign-input-group button:hover {
+    background-color: #b22830;
+  }
+  .coupon-status-msg {
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+  .coupon-status-msg.success { color: #198754; }
+  .coupon-status-msg.error { color: #dc3545; }
+  
+  /* EMPTY CART & EMPTY HISTORY STATE */
+  .cart-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 10px;
+    text-align: center;
+    color: #6c757d;
+  }
+  .cart-empty-state i {
+    font-size: 40px;
+    color: #adb5bd;
+    margin-bottom: 12px;
+  }
+  .cart-empty-state p {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  .btn-redirect-menu {
+    display: inline-block;
+    background-color: #b22830;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  .btn-redirect-menu:hover {
+    background-color: #7b001f;
+  }
+  
+  /* ==========================================================================
+     TÓM TẮT GIỎ HÀNG VÀ BẢNG THỂ HIỆN PHÍ SHIP
+     ========================================================================== */
+  .sticky-summary-card {
+    position: sticky;
+    top: 100px;
+  }
+  .cart-items-list-scroller {
+    max-height: 250px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+  }
+  .summary-product-item-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #fdfbf7;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #f3ebe1;
+    margin-bottom: 10px;
+  }
+  .summary-product-item-row img {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+  }
+  .item-middle-details {
+    flex: 1;
+  }
+  .item-title-name {
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .item-meta-info {
+    font-size: 12px;
+    color: #6c757d;
+  }
+  .item-price-view {
+    font-size: 13px;
+    font-weight: 700;
+    color: #b22830;
+  }
+  .point-badge-cost {
+    color: #fd7e14;
+    background-color: #fff3cd;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 11px;
+    display: inline-block;
+    margin-top: 4px;
+  }
+  .btn-delete-cart-item {
+    background: none;
+    border: none;
+    color: #adb5bd;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.2s;
+  }
+  .btn-delete-cart-item:hover { color: #b22830; }
+  
+  /* BILLING COMPONENT LEDGER */
+  .billing-summary-ledger {
+    background-color: #f8f9fa;
+    padding: 16px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .ledger-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #495057;
+  }
+  .shipping-fee-row {
+    color: #212529;
+    font-weight: 600;
+  }
+  .discount-negative { color: #dc3545; font-weight: 600; }
+  .ledger-divider-line {
+    border-top: 1px dashed #dee2e6;
+    margin: 4px 0;
+  }
+  .final-cash-row {
+    font-size: 16px;
+    font-weight: 800;
+    color: #b22830;
+  }
+  .final-points-row {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fd7e14;
+  }
+  .account-points-badge-info {
+    background-color: #e8f4fd;
+    color: #0d6efd;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px;
+    border-radius: 6px;
+    text-align: center;
+  }
+  
+  .btn-submit-checkout-action {
+    width: 100%;
+    background: linear-gradient(135deg, #b22830 0%, #7b001f 100%);
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: opacity 0.2s;
+  }
+  .btn-submit-checkout-action:hover {
+    opacity: 0.9;
+  }
+  .btn-submit-checkout-action.disabled {
+    background: #ced4da !important;
+    color: #6c757d;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  /* ==========================================================================
+     BẢNG LỊCH SỬ ĐƠN HÀNG ĐÃ ĐẶT
+     ========================================================================== */
+  .order-history-container {
+    animation: fadeIn 0.4s ease-in-out;
+  }
+  .history-content-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.06);
+    border-top: 4px solid #7b001f;
+  }
+  .history-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .btn-back-to-menu {
+    background-color: #53382c;
+    color: #ffffff;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .table-responsive-wrapper { overflow-x: auto; }
+  .orders-history-table { width: 100%; border-collapse: collapse; }
+  .orders-history-table th, .orders-history-table td {
+    padding: 14px;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 13px;
+  }
+  .orders-history-table th { background-color: #f8f9fa; color: #53382c; font-weight: 700; }
+  .order-code-id { font-weight: 700; color: #7b001f; }
+  .order-items-cell-list { line-height: 1.6; }
+  .font-bold-style { font-weight: 700; }
+  .order-cost-val { color: #b22830; }
+  .order-point-val { color: #fd7e14; }
+  
+  .status-badge-element {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .status-badge-element.pending { background-color: #fff3cd; color: #856404; }
+  .status-badge-element.preparing { background-color: #cff4fc; color: #055160; }
+  .status-badge-element.delivering { background-color: #e0cffc; color: #3b0560; }
+  .status-badge-element.completed { background-color: #d1e7dd; color: #0f5132; }
+  .status-badge-element.cancelled { background-color: #f8d7da; color: #842029; }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @media (max-width: 992px) {
+    .cart-grid-layout { grid-template-columns: 1fr; }
+    .sticky-summary-card { position: static; }
+  }

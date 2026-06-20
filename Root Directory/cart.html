@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giỏ Hàng & Thanh Toán - Highlands Coffee</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../src/assets/styles/index.css" />
+    <link rel="stylesheet" href="../src/assets/styles/cart.css" />
+  </head>
+  <body>
+    
+    <header class="navbar">
+      <div class="navbar-container">
+        <div class="nav-left">
+          <div class="menu-item">
+            <a href="menu.html" class="nav-link">THỰC ĐƠN</a>
+            <div class="mega-menu" id="megaMenu"></div>
+          </div>
+          <a href="information.html" class="nav-link">VỀ HIGHLANDS</a>
+          <a href="news.html" class="nav-link">TIN TỨC</a>
+        </div>
+        <a href="index.html" class="logo">
+          <img src="https://www.highlandscoffee.com.vn/vnt_upload/weblink/White_logo800.png" alt="Highlands Coffee" />
+        </a>
+        <div class="nav-right">
+          <div class="profile-dropdown">
+            <img id="navbarAvatar" class="avatar" src="https://i.pravatar.cc/150" alt="avatar" />
+            <div class="dropdown-menu" id="dropdownMenu">
+              <a href="profile.html">Profile</a>
+              <a href="cart.html" class="active">Giỏ hàng</a>
+              <button id="logoutBtn">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="cart-page-container">
+      
+      <div id="checkout-workspace-block" class="cart-grid-layout">
+        
+        <section class="cart-left-section">
+          <div class="cart-card-form">
+            <h2 class="cart-section-title"><i class="fa-solid fa-map-location-dot"></i> Thông Tin Nhận Hàng</h2>
+            
+            <div class="cart-form-group">
+              <label for="txt-fullname">Họ tên khách hàng</label>
+              <input type="text" id="txt-fullname" placeholder="Đang đồng bộ từ tài khoản..." />
+            </div>
+
+            <div class="cart-form-group">
+              <label for="txt-phone">Số điện thoại</label>
+              <input type="text" id="txt-phone" placeholder="Đang đồng bộ..." />
+            </div>
+
+            <div class="cart-form-group">
+              <label for="txt-address">Địa chỉ giao hàng nhận hàng</label>
+              <input type="text" id="txt-address" placeholder="Nhập số nhà, tên đường để tính phí ship..." required />
+            </div>
+
+            <div class="cart-form-group">
+              <label><i class="fa-regular fa-clock"></i> Thời gian nhận hàng</label>
+              <div class="delivery-option-radio-group">
+                <label class="radio-label-container">
+                  <input type="radio" name="delivery-time-type" value="asap" checked />
+                  <span class="custom-radio-mark"></span> Càng sớm càng tốt (30-45 phút)
+                </label>
+                <label class="radio-label-container">
+                  <input type="radio" name="delivery-time-type" value="custom" />
+                  <span class="custom-radio-mark"></span> Chọn thời gian tùy ý
+                </label>
+              </div>
+            </div>
+
+            <div id="custom-datetime-picker-wrapper" class="cart-datetime-row" style="display: none;">
+              <div class="cart-form-group">
+                <label for="date-delivery"><i class="fa-regular fa-calendar"></i> Chọn ngày nhận</label>
+                <input type="date" id="date-delivery" />
+              </div>
+              <div class="cart-form-group">
+                <label for="time-delivery"><i class="fa-regular fa-clock"></i> Chọn giờ nhận</label>
+                <input type="time" id="time-delivery" />
+              </div>
+            </div>
+          </div>
+
+          <div class="cart-card-form margin-top-box">
+            <h3 class="cart-subsection-title">Mã Giảm Giá Chiến Dịch (Campaign)</h3>
+            <div class="campaign-input-group">
+              <input type="text" id="coupon-input" placeholder="Nhập mã ưu đãi của chiến dịch..." />
+              <button type="button" id="btn-apply-coupon">Áp dụng</button>
+            </div>
+            <div id="coupon-feedback-msg" class="coupon-status-msg"></div>
+          </div>
+        </section>
+
+        <section class="cart-right-section">
+          <div class="cart-card-form sticky-summary-card">
+            <h2 class="cart-section-title"><i class="fa-solid fa-bag-shopping"></i> Tóm Tắt Giỏ Hàng</h2>
+            
+            <div id="cart-items-injection-point" class="cart-items-list-scroller">
+              <div class="cart-empty-state">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <p>Giỏ hàng của bạn đang trống.</p>
+                <a href="menu.html" class="btn-redirect-menu">Đến thực đơn ngay</a>
+              </div>
+            </div>
+
+            <div class="billing-summary-ledger">
+              <div class="ledger-line">
+                <span>Tạm tính (Tiền món):</span>
+                <span id="ledger-subtotal-cash">0 đ</span>
+              </div>
+              <div class="ledger-line">
+                <span>Phí vận chuyển (<span id="shipping-distance-text">0 km</span>):</span>
+                <span id="ledger-shipping-fee" class="shipping-fee-row">0 đ</span>
+              </div>
+              <div class="ledger-line">
+                <span>Giảm giá campaign:</span>
+                <span id="ledger-discount" class="discount-negative">-0 đ</span>
+              </div>
+              <div class="ledger-line final-cash-row">
+                <span>Tổng tiền thanh toán:</span>
+                <span id="ledger-total-cash">0 đ</span>
+              </div>
+              
+              <div class="ledger-divider-line"></div>
+              
+              <div class="ledger-line final-points-row">
+                <span>Tổng điểm đổi yêu cầu:</span>
+                <span id="ledger-total-points">0 Điểm</span>
+              </div>
+              <div class="account-points-badge-info">
+                <i class="fa-solid fa-star"></i> Ví điểm hiện tại của bạn: <strong id="user-points-balance">0</strong> điểm
+              </div>
+            </div>
+
+            <button type="button" id="btn-submit-order" class="btn-submit-checkout-action">
+              <i class="fa-solid fa-check-to-slot"></i> XÁC NHẬN ĐẶT HÀNG & ĐỔI ĐIỂM
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <div id="order-history-workspace-block" class="order-history-container" style="display: none;">
+        <div class="history-content-card">
+          <div class="history-card-header">
+            <h2><i class="fa-solid fa-clock-rotate-left"></i> Danh Sách Đơn Hàng Đã Đặt & Trạng Thái</h2>
+            <button type="button" class="btn-back-to-menu" onclick="window.location.href='menu.html'">Tiếp tục mua hàng</button>
+          </div>
+          
+          <div class="table-responsive-wrapper">
+            <table class="orders-history-table">
+              <thead>
+                <tr>
+                  <th>Mã Đơn Hàng</th>
+                  <th>Thời Gian Nhận Hàng</th>
+                  <th>Danh Sách Món</th>
+                  <th>Tiền Mặt Trả</th>
+                  <th>Điểm Khấu Trừ</th>
+                  <th>Trạng Thái Đơn</th>
+                </tr>
+              </thead>
+              <tbody id="order-history-tbody-injection">
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <h3>Highlands Coffee</h3>
+            <p>Đậm vị cà phê truyền thống, kết hợp phong cách hiện đại.</p>
+          </div>
+          <div>
+            <h3>Liên kết</h3>
+            <p><a href="index.html">Trang chủ</a></p>
+            <p><a href="menu.html">Đặt hàng</a></p>
+            <p><a href="auth.html">Đăng nhập </a></p>
+          </div>
+          <div>
+            <h3>Liên hệ</h3>
+            <p>Email: customerservice@highlandscoffee.com.vn</p>
+            <p>Hotline: 1900 1755</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          © 2026 Highlands Coffee Clone. All rights reserved. Địa chỉ: 86 Đường GS1, Đông Hòa, Dĩ An, Đông Hòa, Hồ Chí Minh 75000
+        </div>
+      </div>
+    </footer>
+    <script type="module" src="../src/shared/avatar.js"></script>
+    <script type="module" src="../src/modules/customer/catalog/cart.js"></script>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+  <link
+    rel="stylesheet"
+    href="../src/assets/styles/dashboard.css"
+  >
+</head>
+<body>
+
+  <nav class="admin-navbar">
+    <div class="nav-left">
+      <h2>Highlands Admin</h2>
+      <a href="admin-dashboard.html" class="active">Dashboard</a>
+      <a href="admin-inventory.html">Inventory</a>
+      <a href="admin-categories.html">Categories</a>
+      <a href="admin-orders.html">Orders</a>
+      <a href="admin-reports.html">Reports</a>
+      <a href="admin-campaigns.html">Campaigns</a>
+      <a href="admin-news.html">News</a>
+      <a href="admin-staff.html">Staff</a>
+    </div>
+
+    <div class="nav-right">
+      <div class="profile-dropdown">
+        <img
+          id="navbarAvatar"
+          class="avatar"
+          src="https://i.pravatar.cc/100"
+          alt="avatar"
+        >
+        <div class="dropdown-menu" id="dropdownMenu">
+          <a href="profile.html">Profile</a>
+          <button id="logoutBtn">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="dashboard-container">
+    <h1>Dashboard</h1>
+
+    <section class="stats-grid">
+      <div class="stat-card">
+        <h3>Tổng sản phẩm</h3>
+        <p id="total-products">0</p>
+      </div>
+      <div class="stat-card">
+        <h3>Danh mục chính</h3>
+        <p id="total-categories">0</p>
+      </div>
+      <div class="stat-card">
+        <h3>Danh mục con</h3> <p id="total-sub-categories">0</p>
+      </div>
+      <div class="stat-card">
+        <h3>Tổng người dùng</h3>
+        <p id="total-users">0</p>
+      </div>
+      <div class="stat-card">
+        <h3>Tổng đơn hàng</h3>
+        <p id="total-orders">0</p>
+      </div>
+    </section>
+
+    <section class="recent-section">
+      <div class="section-header">
+        <h2>Sản phẩm mới nhất</h2>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Ảnh</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá bán</th>
+            <th>Phân loại danh mục</th> </tr>
+        </thead>
+        <tbody id="recent-products">
+          </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script
+    type="module"
+    src="../src/modules/admin/dashboard/dashboard.js"
+  ></script>
+  <script
+    type="module"
+    src="../src/shared/avatar.js"
+  ></script>
+</body>
+</html>

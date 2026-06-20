@@ -1,0 +1,459 @@
+/* =======================================================
+   RESET & GLOBAL SETUP
+======================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #ffffff;
+  color: #222222;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* =======================================================
+   NAVBAR (Thanh điều hướng)
+======================================================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  background: #b61f29;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.navbar-container {
+  max-width: 1400px;
+  margin: auto;
+  min-height: 110px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+  flex: 1;
+}
+
+.nav-right {
+  justify-content: flex-end;
+}
+
+.nav-link, .delivery-btn {
+  color: white;
+  font-size: 17px;
+  font-weight: 800;
+  transition: 0.2s;
+}
+
+.nav-link:hover, .nav-link.active, .delivery-btn:hover {
+  color: #f5c16c;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo img {
+  width: 95px;
+  object-fit: contain;
+  transition: 0.25s;
+}
+
+.logo img:hover {
+  transform: scale(1.05);
+}
+
+/* =======================================================
+   PROFILE DROPDOWN
+======================================================= */
+.profile-dropdown {
+  position: relative;
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 190px;
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  display: none;
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu a, .dropdown-menu button {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+  color: #222;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.dropdown-menu a:hover, .dropdown-menu button:hover {
+  background: #f3f3f3;
+}
+
+/* =======================================================
+   MEGA MENU SYSTEM
+======================================================= */
+.menu-item {
+  position: relative;
+  height: 110px;
+  display: flex;
+  align-items: center;
+}
+
+.mega-menu {
+  position: fixed;
+  top: 110px;
+  left: 0;
+  width: 100vw;
+  background: #5b392d;
+  padding: 45px 90px;
+  display: none;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px 60px;
+  z-index: 999;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+}
+
+.menu-item:hover .mega-menu {
+  display: grid;
+}
+
+.mega-column h4 {
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(245, 193, 108, 0.3);
+  padding-bottom: 8px;
+}
+
+.mega-column h4 a {
+  color: #f5c16c !important;
+  font-size: 20px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.mega-column h4 a:hover {
+  color: #ffffff !important;
+}
+
+.mega-column .mega-sub-category {
+  display: block;
+  color: #e0e0e0 !important;
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  transition: all 0.2s ease;
+}
+
+.mega-column .mega-sub-category:hover {
+  color: #f5c16c !important;
+  padding-left: 6px;
+}
+
+/* =======================================================
+   TIÊU ĐỀ TRANG THỰC ĐƠN (ĐÃ THÊM HỌA TIẾT TRANG TRÍ)
+======================================================= */
+.menu-header-title {
+  text-align: center;
+  padding: 80px 20px 50px;
+  background: #ffffff;
+  position: relative;
+}
+
+/* Hiệu ứng chuyển vùng mờ mịn xuống khối Cà Phê phía dưới */
+.menu-header-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25px;
+  background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(240,240,240,0.3));
+  pointer-events: none;
+}
+
+.menu-header-title h2 {
+  font-size: 46px;
+  font-weight: 800;
+  color: #7b001f; /* Màu đỏ đô chuẩn thương hiệu */
+  margin-bottom: 0;
+  letter-spacing: 2px;
+  position: relative;
+}
+
+/* Đường nét trang trí dấu ấn Highlands bên dưới tiêu đề */
+.title-decorator {
+  width: 80px;
+  height: 4px;
+  background: #b61f29;
+  margin: 18px auto 22px;
+  border-radius: 2px;
+  position: relative;
+}
+
+/* Tạo thêm 2 chấm chấm nhỏ hai bên thanh line cho tinh tế */
+.title-decorator::before,
+.title-decorator::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 6px;
+  height: 4px;
+  background: #f5c16c; /* Chấm màu vàng gold quý phái */
+  border-radius: 50%;
+}
+.title-decorator::before { left: -14px; }
+.title-decorator::after { right: -14px; }
+
+.menu-header-title p {
+  color: #555555;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+/* =======================================================
+   BỐ CỤC DANH MỤC ĐAN XEN CHUẨN HIGHLANDS COFFEE (FULL-WIDTH)
+======================================================= */
+.menu-categories-section {
+  width: 100%;
+}
+
+.categories-menu-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0; /* Bỏ padding ngoài để màu nền tràn viền */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Từng dòng danh mục - Tràn viền 100% để đổ màu nền */
+.category-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 480px;
+  padding: 40px 8%;
+  transition: background-color 0.3s ease;
+}
+
+/* Đảo chiều bố cục hình ảnh / chữ xen kẽ ở các hàng chẵn */
+.category-row:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+/* Khối nội dung bên trong */
+.category-image-block,
+.category-content-block {
+  flex: 1;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 40px;
+}
+
+/* Hiệu ứng hình ảnh ly nước đổ bóng và trượt nhẹ */
+.category-image-block a {
+  display: block;
+  text-align: center;
+}
+
+.category-image-block img {
+  max-width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  filter: drop-shadow(0px 20px 25px rgba(0, 0, 0, 0.2));
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.category-image-block img:hover {
+  transform: scale(1.05) translateY(-5px);
+}
+
+/* Định dạng tiêu đề và văn bản mô tả chung */
+.category-title {
+  font-size: 42px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+.category-description {
+  font-size: 16px;
+  line-height: 1.7;
+  text-align: justify;
+}
+
+/* =======================================================
+   BẢNG MÃ MÀU CHUẨN KHỚP THEO DANH MỤC (CATEGORIES MAP)
+======================================================= */
+
+/* 1. KHỐI CÀ PHÊ: Nền đen huyền bí, chữ trắng tinh khôi */
+.cat-ca-phe {
+  background-color: #0c0c0c !important;
+}
+.cat-ca-phe .category-title a { color: #ffffff !important; }
+.cat-ca-phe .category-description { color: #dddddd !important; }
+.cat-ca-phe .category-title a:hover { color: #b61f29 !important; }
+
+/* 2. KHỐI TRÀ: Nền xanh ngọc lam thanh mát, chữ xanh thẫm đại ngàn */
+.cat-tra {
+  background-color: #b2d2b6 !important;
+}
+.cat-tra .category-title a { color: #004d3d !important; }
+.cat-tra .category-description { color: #0f5446 !important; }
+.cat-tra .category-title a:hover { color: #b61f29 !important; }
+
+/* 3. KHỐI FREEZE: Nền xanh lá mint / lục nhạt đá xay, chữ xanh rêu đậm */
+.cat-freeze {
+  background-color: #cce3de !important;
+}
+.cat-freeze .category-title a { color: #1c4e44 !important; }
+.cat-freeze .category-description { color: #28564e !important; }
+.cat-freeze .category-title a:hover { color: #b61f29 !important; }
+
+/* 4. KHỐI BÁNH NGỌT / KHÁC: Nền vàng kem đất nung mộc mạc, chữ nâu cafe */
+.cat-khac {
+  background-color: #f4edd8 !important;
+}
+.cat-khac .category-title a { color: #53382c !important; }
+.cat-khac .category-description { color: #6d4c41 !important; }
+.cat-khac .category-title a:hover { color: #b61f29 !important; }
+
+/* =======================================================
+   FOOTER (Chân trang)
+======================================================= */
+.footer {
+  background: #2b2b2b;
+  color: white;
+  padding: 80px 0 30px;
+}
+
+.footer-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+  padding: 0 40px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-col h3 {
+  margin-bottom: 18px;
+  font-size: 22px;
+  color: #ffffff;
+}
+
+.footer-col p {
+  color: #ccc;
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.footer-col a {
+  color: #ccc;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover {
+  color: #f5c16c;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 24px;
+  text-align: center;
+  color: #aaa;
+  font-size: 14px;
+}
+
+/* =======================================================
+   MÀN HÌNH RESPONSIVE (Dành cho Mobile và Tablet)
+======================================================= */
+@media (max-width: 992px) {
+  .navbar-container {
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+  }
+  .logo {
+    position: static;
+    transform: none;
+    order: -1;
+  }
+  .mega-menu {
+    position: static;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    padding: 30px;
+  }
+  .category-row, .category-row:nth-child(even) {
+    flex-direction: column;
+  }
+  .category-image-block, .category-content-block {
+    width: 100%;
+    padding: 20px;
+  }
+  .category-row:nth-child(even) .category-content-block {
+    padding-left: 20px;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}

@@ -1,0 +1,205 @@
+/* =======================================================
+   NAVBAR ACTIVE STATE SYNC
+======================================================= */
+
+.nav-link.active {
+  color: #f5c16c !important;
+}
+
+.nav-link:hover {
+  color: #f5c16c;
+}
+
+/* =======================================================
+   STYLE FOR INFORMATION PAGE (VỀ HIGHLANDS)
+======================================================= */
+
+.info-page-wrapper {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #ffffff;
+}
+
+/* Base Block Section */
+.info-section {
+  width: 100%;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Khối màu nền chuẩn cho từng Section */
+.block-origin { background-color: #ffffff; }
+.block-service { background-color: #b48c53; }
+.block-career { background-color: #53382c; }
+
+.info-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 80px;
+  display: flex;
+  position: relative;
+  z-index: 3;
+}
+
+.info-container.flex-end {
+  justify-content: flex-end;
+}
+
+/* Card Box */
+.info-card-box {
+  max-width: 550px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.text-right {
+  align-items: flex-end;
+  text-align: right;
+}
+
+/* Typography */
+.info-main-title {
+  font-size: 60px;
+  font-weight: 800;
+  color: #53382c; 
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.info-sub-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #222222;
+  letter-spacing: 1px;
+}
+
+.info-description {
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: #53382c;
+  font-weight: 500;
+}
+
+/* Màu bổ trợ văn bản */
+.text-white { color: #ffffff; }
+.text-gold { color: #eeddbb; }
+.text-beige { color: #ecdcc3; }
+
+/* Styles cho Button Xem chi tiết */
+.info-btn {
+  display: inline-block;
+  padding: 12px 38px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 15px;
+  width: fit-content;
+  transition: all 0.25s ease-in-out;
+}
+
+.btn-outline-dark {
+  border: 1px solid #b61f29;
+  color: #b61f29 !important;
+  background: transparent;
+}
+
+.btn-outline-dark:hover {
+  background: #b61f29;
+  color: #ffffff !important;
+}
+
+.btn-outline-light {
+  border: 1px solid #ffffff;
+  color: #ffffff !important;
+  background: transparent;
+}
+
+.btn-outline-light:hover {
+  background: #ffffff;
+  color: #53382c !important;
+}
+
+/* =======================================================
+   XỬ LÝ HÌNH ẢNH ĐỘC LẬP (Sửa lỗi lấn chữ, vỡ hình)
+======================================================= */
+
+.info-image-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%; /* Ép phần chứa ảnh chiếm chính xác một nửa màn hình */
+  z-index: 1;
+}
+
+/* Định vị vị trí trái/phải cho wrapper ảnh */
+.block-origin .info-image-wrapper,
+.block-career .info-image-wrapper {
+  right: 0;
+}
+
+.block-service .info-image-wrapper {
+  left: 0;
+}
+
+/* Định dạng thẻ ảnh: Đẹp, không méo hình, tự động crop tâm */
+.info-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Lớp màu mờ phủ lên ảnh tạo hiệu ứng chuyển màu mượt mà sang nền trơn */
+.info-image-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.block-origin .info-image-wrapper::after {
+  background: linear-gradient(to right, #ffffff 0%, rgba(255, 255, 255, 0.2) 30%, transparent 100%);
+}
+
+.block-service .info-image-wrapper::after {
+  background: linear-gradient(to left, #b48c53 0%, rgba(180, 140, 83, 0.2) 30%, transparent 100%);
+}
+
+.block-career .info-image-wrapper::after {
+  background: linear-gradient(to right, #53382c 0%, rgba(83, 56, 44, 0.2) 30%, transparent 100%);
+}
+
+/* =======================================================
+   INTERACTION EFFECTS
+======================================================= */
+.element-fade-left, .element-fade-right {
+  opacity: 0;
+  transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.element-fade-left { transform: translateX(-50px); }
+.element-fade-right { transform: translateX(50px); }
+
+.element-fade-left.active, .element-fade-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .info-section { min-height: auto; padding: 60px 0; flex-direction: column; }
+  .info-image-wrapper { position: relative; width: 100%; height: 300px; order: -1; }
+  .info-image-wrapper::after { display: none; }
+  .info-container { padding: 30px 24px 0 24px; justify-content: center !important; }
+  .info-card-box { text-align: center !important; align-items: center !important; max-width: 100%; }
+  .info-main-title { font-size: 42px; }
+}

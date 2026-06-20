@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Staff - Quản lý Đơn hàng</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../src/assets/styles/staff-orders.css" />
+  </head>
+  <body>
+    <nav class="admin-navbar">
+      <div class="nav-left">
+        <h2>Highlands Staff</h2>
+        <a href="staff-orders.html" class="active">Quản lý Đơn hàng</a>
+        <a href="staff-inventory.html">Tình trạng món</a>
+      </div>
+      <div class="nav-right">
+        <div class="profile-dropdown">
+          <img id="navbarAvatar" class="avatar" src="https://i.pravatar.cc/100" alt="avatar" />
+          <div class="dropdown-menu" id="dropdownMenu">
+            <a href="profile.html">Profile</a>
+            <button id="logoutBtn">Log out</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="staff-container">
+      <section class="table-section">
+        <h2>Danh sách đơn hàng cần xử lý</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Khách hàng</th>
+              <th>Số điện thoại</th>
+              <th>Địa chỉ giao hàng</th>
+              <th>Món đã đặt / Số lượng</th>
+              <th>Tổng tiền</th>
+              <th>Phương thức</th>
+              <th>Thời gian đặt</th>
+              <th>Trạng thái đơn</th>
+            </tr>
+          </thead>
+          <tbody id="staff-orders-list">
+            </tbody>
+        </table>
+      </section>
+    </main>
+    <script type="module" src="../src/shared/avatar.js"></script>
+    <script type="module" src="../src/modules/staff/staff-orders.js"></script>
+  </body>
+</html>

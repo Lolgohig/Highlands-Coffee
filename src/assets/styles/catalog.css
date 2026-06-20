@@ -1,0 +1,583 @@
+/* ==========================================================================
+   1. RESET, LAYOUT KHUNG CHÍNH & HIỆU ỨNG CHUYỂN ĐỘNG (SCROLL REVEAL)
+   ========================================================================== */
+.catalog-main-content {
+  max-width: 1400px; /* Đồng bộ độ rộng max-width với container chuẩn hệ thống */
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+/* Các trạng thái rỗng hoặc đang tải dữ liệu */
+.table-sub-empty, 
+.catalog-loading {
+  text-align: center;
+  color: #666666;
+  font-size: 15px;
+  font-style: italic;
+  width: 100%;
+  padding: 40px 0;
+}
+
+.catalog-loading {
+  font-size: 20px;
+  font-weight: 600;
+  color: #7b001f;
+  padding: 120px 0;
+}
+
+/* Khung hiệu ứng cuộn mượt xuất hiện dần */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ==========================================================================
+   2. GIAO DIỆN TỔNG QUAN DANH MỤC CHA - OVERVIEW LAYOUT (CÓ SUB-CATEGORIES)
+   ========================================================================== */
+/* Khối Banner lớn đầu trang */
+.category-hero-banner {
+  height: 320px;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 60px;
+  color: #ffffff;
+  margin-bottom: 45px;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.2);
+}
+
+/* Biến thể Banner nhỏ cho trang không có Sub-categories */
+.category-hero-banner.miniature {
+  height: 160px;
+  margin-bottom: 30px;
+}
+
+.hero-title {
+  font-size: 42px;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.hero-desc {
+  font-size: 18px;
+  margin-top: 12px;
+  max-width: 650px;
+  line-height: 1.6;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Khung bọc danh sách các hàng Sub-category */
+.sub-overview-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 70px;
+}
+
+/* Hàng khối phân chia: Trái là Banner Sub - Phải là cụm 2 sản phẩm */
+.sub-overview-row-block {
+  display: grid;
+  grid-template-columns: 480px 1fr;
+  gap: 35px;
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+/* Cột trái: Khung hình nền banner của Sub-category */
+.sub-block-left-banner {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+}
+
+.sub-banner-zoom-box {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.sub-cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* Hiệu ứng phóng hình khi rê chuột vào khung ảnh */
+.sub-banner-zoom-box:hover .sub-cover-image {
+  transform: scale(1.06);
+}
+
+/* Lớp phủ đen mờ chứa thông tin chữ đè lên ảnh banner con */
+.sub-banner-info-pane {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 25px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+  color: #ffffff;
+  z-index: 2;
+}
+
+.sub-banner-title-link {
+  font-size: 24px;
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 14px;
+  transition: color 0.2s ease;
+}
+
+.sub-banner-title-link:hover {
+  color: #f5c16c; /* Đồng bộ màu vàng cam Highlands */
+}
+
+/* Nút bấm xem chi tiết sản phẩm trên banner con */
+.view-products-action-btn {
+  display: inline-block;
+  padding: 10px 22px;
+  background: #ffffff;
+  color: #b61f29;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: all 0.25s ease;
+}
+
+.view-products-action-btn:hover {
+  background: #b61f29;
+  color: #ffffff;
+  border-color: #b61f29;
+}
+
+/* Cột phải: Vùng chứa danh sách sản phẩm nổi bật */
+.sub-block-right-products {
+  display: flex;
+  align-items: center;
+  padding: 20px 35px;
+}
+
+.mini-products-row-flex {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+}
+
+/* Thẻ sản phẩm thu nhỏ (Mini Card) */
+.mini-product-item-card {
+  flex: 1;
+  max-width: 240px;
+  background: #ffffff;
+  border: 1px solid #f0edf9;
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mini-product-item-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.mini-p-img {
+  width: 100%;
+  height: 130px;
+  object-fit: contain;
+  margin-bottom: 12px;
+  transition: transform 0.3s ease;
+}
+
+.mini-product-item-card:hover .mini-p-img {
+  transform: scale(1.05);
+}
+
+.mini-p-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #222222;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  height: 42px; /* Giới hạn dòng chữ tránh lệch thẻ */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mini-p-price {
+  font-size: 15px;
+  color: #b61f29;
+  font-weight: 800;
+}
+
+
+/* ==========================================================================
+   3. KHỐI KHÁM PHÁ CÁC DANH MỤC KHÁC (OTHER CATEGORIES SHOWCASE)
+   ========================================================================== */
+.other-categories-showcase {
+  border-top: 2px solid #e5dec9;
+  padding-top: 50px;
+}
+
+.showcase-section-title {
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 30px;
+  color: #7b001f;
+  text-transform: uppercase;
+}
+
+.showcase-grid-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+/* Node phần tử danh mục khác */
+.showcase-card-node {
+  flex: 1;
+  min-width: 240px;
+  max-width: 290px;
+  cursor: pointer;
+}
+
+.showcase-img-zoom-frame {
+  width: 100%;
+  height: 180px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  background: #e8e8e8;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.showcase-cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.showcase-card-node:hover .showcase-cover-image {
+  transform: scale(1.08);
+}
+
+.showcase-card-title-hover-red {
+  font-size: 17px;
+  font-weight: 700;
+  color: #333333;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.showcase-card-node:hover .showcase-card-title-hover-red {
+  color: #b61f29;
+}
+
+
+/* ==========================================================================
+   4. GIAO DIỆN CHI TIẾT CÓ THANH TRƯỢT SẢN PHẨM (DETAILED SLIDER LAYOUT)
+   ========================================================================== */
+/* Thanh điều hướng quay lại */
+.breadcrumb-nav-bar {
+  margin-bottom: 30px;
+}
+
+.back-link-node {
+  color: #b61f29;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 15px;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.back-link-node:hover {
+  color: #7b001f;
+}
+
+/* Ngăn xếp chứa các dòng slider */
+.detailed-sliders-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+}
+
+.margin-top-expanded {
+  margin-top: 30px;
+}
+
+/* Khung cha của một hàng Slider */
+.detailed-sub-row-slider-container {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 25px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 24px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.03);
+  align-items: center;
+}
+
+/* Bảng điều khiển tiêu đề và nút bấm bên trái */
+.slider-left-header-pane {
+  padding-right: 20px;
+}
+
+.slider-sub-title-red {
+  font-size: 28px;
+  font-weight: 800;
+  color: #222222;
+  cursor: pointer;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  line-height: 1.3;
+  transition: color 0.2s ease;
+}
+
+.slider-sub-title-red:hover {
+  color: #b61f29;
+}
+
+/* Cụm nút mũi tên */
+.slider-action-arrows-row {
+  display: flex;
+  gap: 12px;
+}
+
+.arrow-ctrl-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #b61f29;
+  background: #ffffff;
+  color: #b61f29;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.arrow-ctrl-btn:hover {
+  background: #b61f29;
+  color: #ffffff;
+}
+
+/* Khung hiển thị giới hạn của Slider bên phải */
+.slider-right-viewport-pane {
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Đường ray chứa danh sách các thẻ sản phẩm */
+.slider-track-rail {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  transition: all 0.4s ease;
+}
+
+/* Thẻ sản phẩm chuẩn trong Slider (Mặc định ẩn) */
+.slider-product-unit-card {
+  display: none;
+  flex: 0 0 calc(33.333% - 16px); /* Chia đều 3 cột tương ứng khít viewport */
+  max-width: calc(33.333% - 16px);
+  background: #ffffff;
+  border: 1px solid #f2f2f2;
+  border-radius: 20px;
+  padding: 20px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Class kích hoạt hiển thị cho nhóm 3 phần tử tích cực */
+.slider-product-unit-card.active-node {
+  display: block;
+  animation: fadeInSliderCard 0.4s ease forwards;
+}
+
+.slider-product-unit-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
+  transform: translateY(-4px);
+}
+
+/* Khung bọc ảnh sản phẩm zoom trong Slider */
+.p-card-thumb-zoom {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 14px;
+  margin-bottom: 16px;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.p-card-image {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.slider-product-unit-card:hover .p-card-image {
+  transform: scale(1.08);
+}
+
+.p-card-body-details {
+  text-align: left;
+}
+
+.p-card-title-hover-red {
+  font-size: 16px;
+  font-weight: 700;
+  color: #222222;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  height: 44px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.slider-product-unit-card:hover .p-card-title-hover-red {
+  color: #b61f29;
+}
+
+.p-card-price-tag {
+  font-size: 16px;
+  font-weight: 800;
+  color: #b61f29;
+}
+
+
+/* ==========================================================================
+   5. HIỆU ỨNG ANIMATION & ĐÁP ỨNG GIAO DIỆN (RESPONSIVE MEDIA QUERIES)
+   ========================================================================== */
+@keyframes fadeInSliderCard {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Màn hình máy tính bảng hoặc laptop nhỏ (Dưới 1024px) */
+@media (max-width: 1024px) {
+  .sub-overview-row-block {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  .sub-block-left-banner {
+    height: 220px;
+  }
+
+  .sub-block-right-products {
+    padding: 25px;
+    justify-content: center;
+  }
+
+  .detailed-sub-row-slider-container {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .slider-left-header-pane {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .slider-sub-title-red {
+    margin-bottom: 0;
+    font-size: 24px;
+  }
+
+  .slider-product-unit-card {
+    flex: 0 0 calc(50% - 12px);
+    max-width: calc(50% - 12px);
+  }
+}
+
+/* Màn hình điện thoại di động lớn / nhỏ (Dưới 600px) */
+@media (max-width: 600px) {
+  .catalog-main-content {
+    padding: 20px 16px;
+  }
+
+  .category-hero-banner {
+    padding: 0 25px;
+    height: 240px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+  }
+
+  .mini-products-row-flex {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .mini-product-item-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .slider-product-unit-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .slider-left-header-pane {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .showcase-grid-flex {
+    justify-content: center;
+  }
+  
+  .showcase-card-node {
+    max-width: 100%;
+  }
+}

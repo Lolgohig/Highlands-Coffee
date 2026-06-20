@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Categories</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../src/assets/styles/categories.css">
+</head>
+<body>
+
+  <nav class="admin-navbar">
+    <div class="nav-left">
+      <h2>Highlands Admin</h2>
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="admin-inventory.html">Inventory</a>
+      <a href="admin-categories.html" class="active">Categories</a>
+      <a href="admin-orders.html">Orders</a>
+      <a href="admin-reports.html">Reports</a>
+      <a href="admin-campaigns.html">Campaigns</a>
+      <a href="admin-news.html">News</a>
+      <a href="admin-staff.html">Staff</a>
+    </div>
+
+    <div class="nav-right">
+      <div class="profile-dropdown">
+        <img src="https://i.pravatar.cc/100" class="avatar" id="navbarAvatar">
+        <div class="dropdown-menu" id="dropdownMenu">
+          <a href="profile.html">Profile</a>
+          <button id="logoutBtn">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="categories-container">
+
+    <section class="form-section">
+      <h2>Thêm / Chỉnh sửa danh mục</h2>
+      
+      <form id="category-form">
+        <input type="hidden" id="category-id">
+
+        <div class="input-group">
+          <label>Tên danh mục chính</label>
+          <input type="text" id="category-name" placeholder="Ví dụ: Cà phê" required>
+        </div>
+
+        <div class="input-group">
+          <label>Mô tả</label>
+          <textarea id="category-description" rows="4" placeholder="Nhập mô tả danh mục..." required></textarea>
+        </div>
+
+        <div class="input-group">
+          <label>Ảnh danh mục chính</label>
+          <input type="file" id="category-image" accept="image/*">
+          <p id="upload-status" class="status-text"></p>
+        </div>
+
+        <div class="sub-categories-form-group">
+          <label class="form-label-bold">Danh mục con (Sub-categories)</label>
+          <p class="form-instruction-text">* Bạn có thể click vào ảnh của thẻ Sub-category phía dưới để thay đổi ảnh nhanh.</p>
+          
+          <div class="sub-input-column">
+            <input type="text" id="sub-category-input" placeholder="Tên danh mục con (Ví dụ: Phandi...)">
+            
+            <div class="sub-image-upload-row">
+              <label for="sub-category-image" class="sub-file-label">Chọn ảnh cho Sub này</label>
+              <input type="file" id="sub-category-image" accept="image/*">
+              <span id="sub-file-name-preview">Chưa chọn ảnh</span>
+            </div>
+
+            <button type="button" id="add-sub-btn">Thêm Sub-Category</button>
+          </div>
+          
+          <input type="file" id="quick-change-sub-image" accept="image/*" style="display: none;">
+          
+          <div id="sub-category-tags" class="tags-container-v2"></div>
+        </div>
+
+        <button type="submit" class="submit-main-btn">
+          Lưu danh mục
+        </button>
+      </form>
+    </section>
+
+    <section class="table-section">
+      <h2>Danh sách danh mục</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Ảnh</th>
+            <th>Tên</th>
+            <th>Mô tả</th>
+            <th>Danh mục con (Có ảnh)</th>
+            <th>Số sản phẩm</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody id="category-list"></tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <script type="module" src="../src/modules/admin/categories/categories.js"></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Reports</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+  <link
+    rel="stylesheet"
+    href="../src/assets/styles/reports.css"
+  >
+</head>
+<body>
+
+  <nav class="admin-navbar">
+    <div class="nav-left">
+      <h2>Highlands Admin</h2>
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="admin-inventory.html">Inventory</a>
+      <a href="admin-categories.html">Categories</a>
+      <a href="admin-orders.html">Orders</a>
+      <a href="admin-reports.html" class="active">Reports</a>
+      <a href="admin-campaigns.html">Campaigns</a>
+      <a href="admin-news.html">News</a>
+      <a href="admin-staff.html">Staff</a>
+    </div>
+
+    <div class="nav-right">
+      <div class="profile-dropdown">
+        <img
+          id="navbarAvatar"
+          class="avatar"
+          src="https://i.pravatar.cc/100"
+          alt="avatar"
+        >
+        <div class="dropdown-menu" id="dropdownMenu">
+          <a href="profile.html">Profile</a>
+          <button id="logoutBtn">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="reports-container">
+
+    <section class="stats-grid">
+      <div class="stat-card">
+        <h3>Tổng doanh thu</h3>
+        <p id="total-revenue">0 VNĐ</p>
+      </div>
+      <div class="stat-card">
+        <h3>Tổng đơn hàng</h3>
+        <p id="total-orders">0</p>
+      </div>
+      <div class="stat-card">
+        <h3>Đơn hoàn thành</h3>
+        <p id="completed-orders">0</p>
+      </div>
+      <div class="stat-card">
+        <h3>Sản phẩm bán</h3>
+        <p id="total-products-sold">0</p>
+      </div>
+    </section>
+
+    <div class="reports-tables-grid">
+      
+      <section class="report-card">
+        <h2>Sản phẩm bán chạy</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Sản phẩm</th>
+              <th>Số lượng bán</th>
+            </tr>
+          </thead>
+          <tbody id="best-sellers">
+            </tbody>
+        </table>
+      </section>
+
+      <section class="report-card">
+        <h2>Hiệu suất theo Danh mục con</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Danh mục con</th>
+              <th>Sản lượng bán ra</th>
+            </tr>
+          </thead>
+          <tbody id="sub-categories-report">
+            </tbody>
+        </table>
+      </section>
+
+    </div>
+
+    <section class="report-card recent-orders-section">
+      <h2>Đơn hàng gần đây</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Khách hàng</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+          </tr>
+        </thead>
+        <tbody id="recent-orders">
+          </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <script
+    type="module"
+    src="../src/modules/admin/reports/reports.js"
+  ></script>
+  <script
+    type="module"
+    src="../src/shared/avatar.js"
+  ></script>
+</body>
+</html>

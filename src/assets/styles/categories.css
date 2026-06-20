@@ -1,0 +1,477 @@
+/* =======================================================
+   RESET & BASE SETUP
+======================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #f8f9fa;
+  color: #333;
+}
+
+/* =======================================================
+   NAVBAR ADMIN
+======================================================= */
+.admin-navbar {
+  min-height: 70px;
+  background: #7b001f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 30px;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.nav-left h2 {
+  color: white;
+  font-size: 22px;
+  margin-right: 10px;
+}
+
+.nav-left a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 6px 0;
+  transition: all 0.2s ease;
+}
+
+.nav-left a:hover {
+  color: white;
+}
+
+.nav-left a.active {
+  color: #ffffff;
+  border-bottom: 2px solid #f5c16c;
+  font-weight: 600;
+}
+
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid rgba(255,255,255,0.8);
+}
+
+.profile-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 55px;
+  background: white;
+  width: 180px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: none;
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-menu.show { display: block; }
+
+.dropdown-menu a,
+.dropdown-menu button {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+  background: #f5f5f5;
+  color: #7b001f;
+}
+
+/* =======================================================
+   LAYOUT KHUNG CONTAINER CHÍNH
+======================================================= */
+.categories-container {
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.form-section,
+.table-section {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.form-section h2,
+.table-section h2 {
+  margin-bottom: 24px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+  border-left: 4px solid #7b001f;
+  padding-left: 12px;
+}
+
+/* =======================================================
+   INPUT FIELDS STYLES
+======================================================= */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.input-group label,
+.form-label-bold {
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #444;
+}
+
+.form-instruction-text {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.input-group input[type="text"],
+.input-group textarea,
+.sub-input-column input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.input-group input:focus,
+.input-group textarea:focus,
+.sub-input-column input:focus {
+  border-color: #7b001f;
+  box-shadow: 0 0 0 3px rgba(123, 0, 31, 0.15);
+}
+
+.status-text {
+  font-size: 12px;
+  color: #2b7a4b;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* =======================================================
+   ĐỊNH DẠNG KHU VỰC THÊM SUB-CATEGORY CÓ HÌNH ẢNH
+======================================================= */
+.sub-categories-form-group {
+  margin-bottom: 24px;
+  background: #fdfdfd;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px dashed #ced4da;
+}
+
+.sub-input-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.sub-image-upload-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sub-file-label {
+  background: #e9ecef;
+  color: #495057;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid #ced4da;
+  transition: all 0.2s;
+}
+
+.sub-file-label:hover {
+  background: #dee2e6;
+}
+
+.sub-image-upload-row input[type="file"] {
+  display: none;
+}
+
+#sub-file-name-preview {
+  font-size: 12px;
+  color: #6c757d;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#add-sub-btn {
+  background: #333333;
+  color: white;
+  padding: 10px;
+  font-size: 13px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+#add-sub-btn:hover {
+  background: #111;
+}
+
+/* Các thẻ preview Sub-category nhỏ có ảnh */
+.tags-container-v2 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.sub-category-preview-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  padding: 8px 12px;
+  border-radius: 8px;
+  gap: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  transition: all 0.2s ease;
+}
+
+.sub-category-preview-card:hover {
+  border-color: #7b001f;
+  background: #fffcfc;
+}
+
+.sub-card-click-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.sub-card-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #f8f9fa;
+  border: 1px solid #eee;
+  transition: transform 0.2s;
+}
+
+.sub-card-click-area:hover .sub-card-img {
+  transform: scale(1.05);
+}
+
+.sub-card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-card-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.sub-card-hint {
+  font-size: 11px;
+  color: #7b001f;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.sub-card-delete-btn {
+  background: transparent;
+  border: none;
+  color: #dc3545;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0 6px;
+  font-weight: bold;
+}
+
+.sub-card-delete-btn:hover {
+  transform: scale(1.2);
+}
+
+/* =======================================================
+   BUTTONS CHÍNH
+======================================================= */
+.submit-main-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #7b001f;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  transition: background 0.2s;
+}
+
+.submit-main-btn:hover {
+  background: #5c0017;
+}
+
+/* =======================================================
+   TABLE DESIGN MANAGEMENT
+======================================================= */
+.table-section {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+th, td {
+  padding: 16px 14px;
+  border-bottom: 1px solid #edf2f7;
+  text-align: left;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+th {
+  background: #f8f9fa;
+  font-weight: 700;
+  color: #4a5568;
+}
+
+.category-image {
+  width: 65px;
+  height: 65px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid #e2e8f0;
+}
+
+.product-count-badge {
+  background: #e2e8f0;
+  color: #4a5568;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+/* ĐỊNH DẠNG HIỂN THỊ LIST SUB Ở TABLE */
+.table-subs-flex-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 260px;
+}
+
+.table-sub-item-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f1f5f9;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.table-sub-item-chip span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.table-sub-thumb {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
+}
+
+.table-sub-empty {
+  color: #a0aec0;
+  font-style: italic;
+  font-size: 13px;
+}
+
+.edit-btn,
+.delete-btn {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 13px;
+  transition: opacity 0.2s;
+  margin-right: 4px;
+}
+
+.edit-btn { background: #3182ce; }
+.delete-btn { background: #e53e3e; }
+.edit-btn:hover, .delete-btn:hover { opacity: 0.85; }
+
+/* =======================================================
+   RESPONSIVE DESIGN
+======================================================= */
+@media (max-width: 1200px) {
+  .categories-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-navbar { padding: 15px; }
+  .categories-container { padding: 15px; gap: 20px; }
+  .form-section, .table-section { padding: 20px; }
+}
