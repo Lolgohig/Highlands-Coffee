@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thực Đơn - Highlands Coffee</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../src/assets/styles/menu.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar-container">
+      
+      <div class="nav-left">
+        <div class="menu-item">
+          <a href="menu.html" class="nav-link active">THỰC ĐƠN</a>
+          
+          <div class="mega-menu" id="megaMenu"></div>
+        </div>
+        <a href="information.html" class="nav-link">VỀ HIGHLANDS</a>
+        <a href="news.html" class="nav-link">TIN TỨC</a>
+      </div>
+
+      <a href="index.html" class="logo">
+        <img src="https://www.highlandscoffee.com.vn/vnt_upload/weblink/White_logo800.png" alt="Highlands Coffee">
+      </a>
+
+      <div class="nav-right">
+        
+
+        <div class="profile-dropdown">
+          <img id="navbarAvatar" class="avatar" src="https://i.pravatar.cc/150" alt="avatar">
+          
+          <div class="dropdown-menu" id="dropdownMenu">
+            <a href="profile.html">Profile</a>
+            <a href="cart.html">Giỏ hàng</a>
+            <button id="logoutBtn">Logout</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+<section class="menu-header-title">
+    <h2>THỰC ĐƠN</h2>
+    <div class="title-decorator"></div> <p>Hãy khám phá thế giới hương vị Highlands Coffee đầy lôi cuốn</p>
+  </section>
+
+  <main class="menu-categories-section">
+    <div id="categoriesMenuContainer" class="categories-menu-container">
+      </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        
+        <div class="footer-col">
+          <h3>Highlands Coffee</h3>
+          <p>Đậm vị cà phê truyền thống, kết hợp phong cách hiện đại.</p>
+        </div>
+
+        <div class="footer-col">
+          <h3>Liên kết</h3>
+          <p><a href="index.html">Trang chủ</a></p>
+          <p><a href="menu.html">Đặt hàng</a></p>
+          <p><a href="auth.html">Đăng nhập</a></p>
+        </div>
+
+        <div class="footer-col">
+          <h3>Liên hệ</h3>
+          <p>Email: customerservice@highlandscoffee.com.vn</p>
+          <p>Hotline: 1900 1755</p>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        © 2026 Highlands Coffee Clone. All rights reserved. Địa chỉ: 86 Đường GS1, Đông Hòa, Dĩ An, Đông Hòa, Hồ Chí Minh 75000
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="../src/modules/customer/home/menu.js"></script>
+
+</body>
+</html>

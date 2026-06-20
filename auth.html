@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Auth</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Manrope&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../src/assets/styles/auth.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- LEFT -->
+  <div class="left">
+    <div class="overlay-text">
+      <h1>
+        The Art of <br>
+        <span>Vietnamese</span> Coffee
+      </h1>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+
+    <h2 class="logo">Highlands Coffee</h2>
+
+    <h3 id="mainTitle">Welcome Back</h3>
+    <p id="subTitle">Please enter your details to access your account</p>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <div id="slider"></div>
+      <span id="tabLogin" class="active">Sign In</span>
+      <span id="tabRegister">Register</span>
+    </div>
+
+    <!-- FORM WRAPPER -->
+    <div class="form-wrapper">
+
+      <!-- LOGIN -->
+      <form id="loginForm" class="form active" autocomplete="off">
+        <input id="loginEmail" type="email" placeholder="Email" required>
+        <input id="loginPassword" type="password" placeholder="Password" required>
+
+        <label>
+          <input type="checkbox" id="rememberLogin">
+          <span>Keep me signed in</span>
+        </label>
+
+        <button type="submit">Sign In</button>
+      </form>
+
+      <!-- REGISTER -->
+      <form id="registerForm" class="form" autocomplete="off">
+        <input id="registerEmail" type="email" placeholder="Email" required>
+        <input id="registerPassword" type="password" placeholder="Password" required>
+
+        <!-- 🔥 FIX: thêm confirm password -->
+        <input id="confirmPassword" type="password" placeholder="Confirm Password" required>
+
+        <label>
+          <input type="checkbox" id="rememberRegister">
+          <span>Keep me signed in</span>
+        </label>
+
+        <button type="submit">Register</button>
+      </form>
+
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="divider">Or continue with</div>
+
+    <!-- GOOGLE BUTTON -->
+    <button id="googleBtn" class="google">
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="google">
+      <span>Google</span>
+    </button>
+
+  </div>
+
+</div>
+
+<script type="module" src="../src/modules/customer/auth/auth.js"></script>
+</body>
+</html>

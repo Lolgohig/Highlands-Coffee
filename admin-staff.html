@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi" translate="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Staff - Quản Lý Nhân Sự & Chấm Công</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../src/assets/styles/staff.css">
+</head>
+<body>
+
+  <nav class="admin-navbar">
+    <div class="nav-left">
+      <h2>Highlands Admin</h2>
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="admin-inventory.html">Inventory</a>
+      <a href="admin-categories.html">Categories</a>
+      <a href="admin-orders.html">Orders</a>
+      <a href="admin-reports.html">Reports</a>
+      <a href="admin-campaigns.html">Campaigns</a>
+      <a href="admin-news.html">News</a>
+      <a href="admin-staff.html" class="active">Staff</a>
+    </div>
+
+    <div class="nav-right">
+      <div class="profile-dropdown">
+        <img id="navbarAvatar" class="avatar" src="https://i.pravatar.cc/100">
+        <div class="dropdown-menu" id="dropdownMenu">
+          <a href="profile.html">Profile</a>
+          <button id="logoutBtn">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="staff-container">
+
+    <div class="left-sidebar">
+      
+      <section class="form-section">
+        <h2>Thêm / Chỉnh sửa nhân viên</h2>
+        <form id="staff-form">
+          <input type="hidden" id="staff-id">
+
+          <div class="input-group">
+            <label>Ảnh nhân viên</label>
+            <input type="file" id="staff-image" accept="image/*">
+            <p id="upload-status"></p>
+          </div>
+
+          <div class="input-group">
+            <label>Họ tên</label>
+            <input type="text" id="name" required>
+          </div>
+
+          <div class="input-group">
+            <label>Email</label>
+            <input type="email" id="email" required>
+          </div>
+
+          <div class="input-group">
+            <label>Vai trò</label>
+            <select id="role">
+              <option value="cashier">Thu ngân (Cashier)</option>
+              <option value="barista">Pha chế (Barista)</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label>Trạng thái nhân viên</label>
+            <select id="active">
+              <option value="true">🟢 Đang làm việc</option>
+              <option value="false">🔴 Nghỉ việc</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label>Lương gốc (Tháng)</label>
+            <input type="number" id="base-salary" required>
+          </div>
+
+          <div class="input-group">
+            <label>Tiền vi phạm khấu trừ</label>
+            <input type="number" id="violation-money" value="0">
+          </div>
+
+          <div class="input-group">
+            <label>Chi tiết lỗi vi phạm trong tháng</label>
+            <textarea id="violation-note" placeholder="- Đi trễ 15p ngày 05/06&#10;- Sai đồng phục ngày 08/06"></textarea>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="salary-paid">
+            <label for="salary-paid">Đã trả lương tháng này</label>
+          </div>
+
+          <button type="submit">Lưu nhân viên</button>
+        </form>
+      </section>
+
+      <section class="violation-lookup-section">
+        <h3><i class="fa-solid fa-triangle-exclamation"></i> Barem Lỗi Vi Phạm & Khấu Trừ</h3>
+        <ul class="violation-rules-list">
+          <li><span>Đi trễ dưới 15 phút:</span> <strong class="penalty-text">20,000 VNĐ</strong></li>
+          <li><span>Đi trễ trên 15 phút:</span> <strong class="penalty-text">50,000 VNĐ</strong></li>
+          <li><span>Không mặc đúng đồng phục / tạp dề:</span> <strong class="penalty-text">30,000 VNĐ</strong></li>
+          <li><span>Làm sai công thức / Hủy đồ uống của khách:</span> <strong class="penalty-text">50,000 VNĐ + Tiền món</strong></li>
+          <li><span>Thái độ không tốt với khách hàng:</span> <strong class="penalty-text">100,000 VNĐ</strong></li>
+          <li><span>Nghỉ tự do không phép (Vắng không lý do):</span> <strong class="penalty-text">300,000 VNĐ / ngày</strong></li>
+        </ul>
+      </section>
+
+    </div>
+
+    <section class="table-section">
+      <h2>Danh sách nhân viên & Quản lý chấm công tháng này</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Ảnh</th>
+            <th>Nhân viên</th>
+            <th>Vai trò</th>
+            <th>Trạng thái</th>
+            <th>Điểm danh hôm nay</th>
+            <th>Số ngày công</th>
+            <th>Lương gốc</th>
+            <th>Khấu trừ</th>
+            <th>Thực nhận</th>
+            <th>Chi tiết vi phạm</th>
+            <th>Lương</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody id="staff-list">
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <script type="module" src="../src/modules/admin/staff/staff.js"></script>
+  <script type="module" src="../src/shared/avatar.js"></script>
+</body>
+</html>

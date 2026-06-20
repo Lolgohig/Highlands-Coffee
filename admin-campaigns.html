@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Campaigns</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../src/assets/styles/campaigns.css" />
+  </head>
+  <body>
+    <nav class="admin-navbar">
+      <div class="nav-left">
+        <h2>Highlands Admin</h2>
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a href="admin-inventory.html">Inventory</a>
+        <a href="admin-categories.html">Categories</a>
+        <a href="admin-orders.html">Orders</a>
+        <a href="admin-reports.html">Reports</a>
+        <a href="admin-campaigns.html" class="active">Campaigns</a>
+        <a href="admin-news.html">News</a>
+        <a href="admin-staff.html">Staff</a>
+      </div>
+      <div class="nav-right">
+        <div class="profile-dropdown">
+          <img id="navbarAvatar" class="avatar" src="https://i.pravatar.cc/100" />
+          <div class="dropdown-menu" id="dropdownMenu">
+            <a href="profile.html">Profile</a>
+            <button id="logoutBtn">Logout</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="campaigns-container">
+      <section class="form-section">
+        <h2>Tạo Campaign</h2>
+        <form id="campaign-form">
+          <input type="hidden" id="campaign-id" />
+          
+          <div class="input-group">
+            <label>Tiêu đề</label>
+            <input type="text" id="title" placeholder="Nhập tiêu đề..." required />
+          </div>
+          
+          <div class="input-group">
+            <label>Mã code khuyến mãi</label>
+            <input type="text" id="campaign-code" placeholder="Ví dụ: SALE2026" required />
+          </div>
+
+          <div class="input-group">
+            <label>Loại chiến dịch (Campaign Type)</label>
+            <select id="campaign-type" required>
+              <option value="">-- Chọn loại chiến dịch --</option>
+              <option value="percentage">Giảm giá theo phần trăm (%)</option>
+              <option value="flat_amount">Giảm trực tiếp bằng số tiền (đ)</option>
+              <option value="buy_x_get_y">Mua X tặng Y</option>
+            </select>
+          </div>
+
+          <div id="fields-percentage" class="conditional-fields">
+            <div class="input-group">
+              <label>Phần trăm giảm giá</label>
+              <select id="discount-percent">
+                <option value="0">-- Chọn mức giảm --</option>
+                <option value="5">5%</option><option value="10">10%</option><option value="15">15%</option><option value="20">20%</option>
+                <option value="25">25%</option><option value="30">30%</option><option value="40">40%</option><option value="50">50%</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label>Danh mục áp dụng (Chọn nhiều)</label>
+              <div id="pct-categories" class="multiselect-container"></div>
+            </div>
+            <div id="pct-sub-wrapper" class="input-group sub-wrapper">
+              <label>Danh mục con áp dụng tương ứng</label>
+              <div id="pct-subcategories" class="multiselect-container"></div>
+            </div>
+          </div>
+
+          <div id="fields-flat-amount" class="conditional-fields">
+            <div class="input-group">
+              <label>Số tiền giảm giá (VNĐ)</label>
+              <input type="number" id="discount-flat-value" placeholder="Ví dụ: 20000" min="0" />
+            </div>
+            <div class="input-group">
+              <label>Danh mục áp dụng (Chọn nhiều)</label>
+              <div id="flat-categories" class="multiselect-container"></div>
+            </div>
+            <div id="flat-sub-wrapper" class="input-group sub-wrapper">
+              <label>Danh mục con áp dụng tương ứng</label>
+              <div id="flat-subcategories" class="multiselect-container"></div>
+            </div>
+          </div>
+
+          <div id="fields-buy-x-get-y" class="conditional-fields">
+            <div class="flex-row">
+              <div class="input-group">
+                <label>Số lượng mua (X)</label>
+                <input type="number" id="buy-qty" placeholder="Số lượng X" min="1" />
+              </div>
+              <div class="input-group">
+                <label>Số lượng tặng (Y)</label>
+                <input type="number" id="get-qty" placeholder="Số lượng Y" min="1" />
+              </div>
+            </div>
+            
+            <div class="campaign-sub-heading" style="color: #7b001f;">Cấu hình điều kiện MUA (X)</div>
+            <div class="input-group">
+              <label>Danh mục mua áp dụng (Chọn nhiều)</label>
+              <div id="buy-categories" class="multiselect-container"></div>
+            </div>
+            <div id="buy-sub-wrapper" class="input-group sub-wrapper">
+              <label>Danh mục con mua áp dụng tương ứng</label>
+              <div id="buy-subcategories" class="multiselect-container"></div>
+            </div>
+
+            <div class="campaign-sub-heading" style="color: #2e7d32;">Cấu hình điều kiện TẶNG (Y)</div>
+            <div class="input-group">
+              <label>Danh mục tặng áp dụng (Chọn nhiều)</label>
+              <div id="get-categories" class="multiselect-container"></div>
+            </div>
+            <div id="get-sub-wrapper" class="input-group sub-wrapper">
+              <label>Danh mục con tặng áp dụng tương ứng</label>
+              <div id="get-subcategories" class="multiselect-container"></div>
+            </div>
+          </div>
+
+          <div class="input-group" style="margin-top: 15px;">
+            <label>Mô tả</label>
+            <textarea id="description" placeholder="Nhập mô tả..." required></textarea>
+          </div>
+          
+          <div class="input-group">
+            <label>Ngày bắt đầu</label>
+            <input type="date" id="start-date" required />
+          </div>
+          <div class="input-group">
+            <label>Ngày kết thúc</label>
+            <input type="date" id="end-date" required />
+          </div>
+          <div class="input-group">
+            <label>Banner</label>
+            <input type="file" id="banner-image" accept="image/*" />
+            <p id="upload-status"></p>
+          </div>
+          <button type="submit">Lưu Campaign</button>
+        </form>
+      </section>
+
+      <section class="table-section">
+        <h2>Danh sách Campaign</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Banner</th>
+              <th>Tiêu đề</th>
+              <th>Mã Code</th>
+              <th>Loại & Giá trị giảm</th>
+              <th>Thời gian</th>
+              <th>Trạng thái</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody id="campaign-list"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script type="module" src="../src/modules/admin/campaigns/campaigns.js"></script>
+    <script type="module" src="../src/shared/avatar.js"></script>
+  </body>
+</html>

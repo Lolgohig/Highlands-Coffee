@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Inventory</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../src/assets/styles/admin.css" />
+  </head>
+  <body>
+    <nav class="admin-navbar">
+      <div class="nav-left">
+        <h2>Highlands Admin</h2>
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a href="admin-inventory.html" class="active">Inventory</a>
+        <a href="admin-categories.html">Categories</a>
+        <a href="admin-orders.html">Orders</a>
+        <a href="admin-reports.html">Reports</a>
+        <a href="admin-campaigns.html">Campaigns</a>
+        <a href="admin-news.html">News</a>
+        <a href="admin-staff.html">Staff</a>
+      </div>
+      <div class="nav-right">
+        <div class="profile-dropdown">
+          <img
+            id="navbarAvatar"
+            class="avatar"
+            src="https://i.pravatar.cc/100"
+            alt="avatar"
+          />
+          <div class="dropdown-menu" id="dropdownMenu">
+            <a href="profile.html">Profile</a>
+            <button id="logoutBtn">Logout</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="inventory-container">
+      <section class="form-section">
+        <h2>Thêm / Chỉnh sửa sản phẩm</h2>
+        <form id="product-form">
+          <input type="hidden" id="product-id" />
+          
+          <div class="input-group">
+            <label>Tên món</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Nhập tên món..."
+              required
+            />
+          </div>
+          
+          <div class="input-group" id="price-wrapper">
+            <label>Giá (VNĐ)</label>
+            <input
+              type="number"
+              id="price"
+              placeholder="Nhập giá..."
+              required
+            />
+          </div>
+
+          <div class="input-group" id="points-wrapper" style="display: none;">
+            <label>Số điểm cần đổi (Loyalty Points)</label>
+            <input
+              type="number"
+              id="points"
+              placeholder="Nhập số điểm cần đổi..."
+            />
+          </div>
+          
+          <div class="input-group">
+            <label>Danh mục chính</label>
+            <select id="category" required>
+              <option value="">-- Chọn danh mục --</option>
+            </select>
+          </div>
+
+          <div class="input-group" id="sub-category-wrapper">
+            <label>Danh mục con (Sub-category)</label>
+            <select id="sub-category">
+              <option value="">-- Chọn danh mục con --</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label>Trạng thái kho hàng</label>
+            <select id="status" required>
+              <option value="in-stock">Còn hàng</option>
+              <option value="out-of-stock">Hết hàng</option>
+            </select>
+          </div>
+          
+          <div class="input-group">
+            <label>Mô tả sản phẩm</label>
+            <textarea
+              id="description"
+              rows="4"
+              placeholder="Nhập mô tả sản phẩm..."
+              required
+            ></textarea>
+          </div>
+          
+          <div class="input-group">
+            <label>Hình ảnh</label>
+            <input type="file" id="image-file" accept="image/*" />
+            <p id="upload-status"></p>
+          </div>
+          
+          <button type="submit" id="save-btn">Lưu sản phẩm</button>
+        </form>
+      </section>
+
+      <section class="table-section">
+        <h2>Danh sách sản phẩm</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Ảnh</th>
+              <th>Tên</th>
+              <th>Giá / Điểm</th>
+              <th>Danh mục chính</th>
+              <th>Danh mục con</th>
+              <th>Trạng thái</th>
+              <th>Mô tả</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody id="product-list"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script
+      type="module"
+      src="../src/modules/admin/inventory/inventory.js"
+    ></script>
+    <script type="module" src="../src/shared/avatar.js"></script>
+  </body>
+</html>

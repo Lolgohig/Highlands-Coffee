@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin News</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../src/assets/styles/admin-news.css"> </head>
+<body>
+
+  <nav class="admin-navbar">
+    <div class="nav-left">
+      <h2>Highlands Admin</h2>
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="admin-inventory.html">Inventory</a>
+      <a href="admin-categories.html">Categories</a>
+      <a href="admin-orders.html">Orders</a>
+      <a href="admin-reports.html">Reports</a>
+      <a href="admin-campaigns.html">Campaigns</a>
+      <a href="admin-news.html" class="active">News</a>
+      <a href="admin-staff.html">Staff</a>
+    </div>
+    <div class="nav-right">
+      <div class="profile-dropdown">
+        <img src="https://i.pravatar.cc/100" class="avatar" id="navbarAvatar">
+        <div class="dropdown-menu" id="dropdownMenu">
+          <a href="profile.html">Profile</a>
+          <button id="logoutBtn">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="categories-container">
+    <section class="form-section">
+      <h2>Thêm / Chỉnh sửa tin tức</h2>
+      <form id="news-form">
+        <input type="hidden" id="news-id">
+
+        <div class="input-group">
+          <label>Tên tin tức</label>
+          <input type="text" id="news-title" placeholder="Nhập tiêu đề..." required>
+        </div>
+
+        <div class="input-group">
+          <label>Thời gian đăng</label>
+          <input type="date" id="news-date" required>
+        </div>
+
+        <div class="input-group">
+          <label>Nội dung</label>
+          <textarea id="news-content" rows="4" placeholder="Nhập nội dung tin tức..." required></textarea>
+        </div>
+
+        <div class="input-group">
+          <label>Ảnh tin tức</label>
+          <input type="file" id="news-image" accept="image/*">
+          <p id="upload-status"></p>
+        </div>
+
+        <button type="submit">Lưu tin tức</button>
+      </form>
+    </section>
+
+    <section class="table-section">
+      <h2>Danh sách tin tức</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Ảnh</th>
+            <th>Tiêu đề</th>
+            <th>Thời gian</th>
+            <th>Nội dung</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody id="news-list"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script type="module" src="../src/modules/admin/news/news.js"></script>
+  <script type="module" src="../src/shared/avatar.js"></script>
+</body>
+</html>

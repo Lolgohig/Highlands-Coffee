@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../src/assets/styles/profile.css">
+</head>
+
+<body>
+
+<div class="profile-container">
+
+  <div class="profile-card">
+
+    <h1>My Profile</h1>
+
+    <div class="avatar-box">
+      <img id="avatarPreview" src="https://i.pravatar.cc/200">
+      <input type="file" id="avatarInput" accept="image/*">
+    </div>
+
+    <div class="membership-status-card">
+      <div class="status-header">
+        <h3>Hạng Hiện Tại: <span id="currentRankText">Bronze</span></h3>
+        <p>Điểm Tích Lũy: <span id="currentPointsText">0</span>/10,000 XP</p>
+      </div>
+      <div class="progress-bar-container">
+        <div id="progressBar" class="progress-bar-fill" style="width: 0%"></div>
+      </div>
+      <p id="nextRankHint" class="rank-hint-msg">Đang tính toán mốc tiếp theo...</p>
+      
+      <button type="button" id="upgradeRankBtn" class="upgrade-btn" disabled>
+        Yêu Cầu Lên Hạng
+      </button>
+    </div>
+
+    <form id="profileForm">
+
+      <div class="grid">
+
+        <div class="input-group">
+          <label>Full Name</label>
+          <input type="text" id="name">
+        </div>
+
+        <div class="input-group">
+          <label>Email</label>
+          <input type="email" id="email" disabled>
+        </div>
+
+        <div class="input-group">
+          <label>Phone</label>
+          <input type="text" id="phone">
+        </div>
+
+        <div class="input-group">
+          <label>Birthday</label>
+          <input type="date" id="birthday">
+        </div>
+
+        <div class="input-group">
+          <label>Gender</label>
+          <select id="gender">
+            <option value="">Choose</option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label>Address</label>
+          <input type="text" id="address">
+        </div>
+
+        <div class="input-group">
+          <label>Role</label>
+          <input type="text" id="role" disabled>
+        </div>
+
+        <div class="input-group">
+          <label>Membership</label>
+          <input type="text" id="membershipLevel" disabled>
+        </div>
+
+        <div class="input-group">
+          <label>Loyalty Points</label>
+          <input type="text" id="loyaltyPoints" disabled>
+        </div>
+
+      </div>
+
+      <button type="submit" class="save-btn">
+        Save Profile
+      </button>
+
+    </form>
+
+    <div class="membership-policy-section">
+      <h3>📜 CHÍNH SÁCH THÀNH VIÊN HIGHLANDS</h3>
+      <div class="policy-grid">
+        <div class="policy-item">
+          <h4>💡 Cách tích lũy điểm:</h4>
+          <p>Mỗi khi đặt đơn hàng thành công, cứ <strong>10,000 VNĐ</strong> chi tiêu bạn sẽ nhận được liền <strong>1 điểm thưởng</strong> tích lũy tự động.</p>
+        </div>
+        <div class="policy-item">
+          <h4>🏆 Hệ thống cấp bậc hội viên:</h4>
+          <ul>
+            <li><strong>Bronze:</strong> Cấp độ khởi đầu (Từ 0 đến 999 điểm). Mặc định giảm 1% hóa đơn.</li>
+            <li><strong>Iron:</strong> Đạt từ <strong>1,000 điểm</strong> Giảm trực tiếp 3% hóa đơn</li>
+            <li><strong>Gold:</strong> Đạt từ <strong>3,000 điểm</strong>. Ưu đãi giảm trực tiếp 5% hóa đơn.</li>
+            <li><strong>Diamond:</strong> Đạt từ <strong>6,000 điểm</strong>. Tặng bánh ngọt miễn phí vào tuần sinh nhật.</li>
+            <li><strong>Platinum:</strong> Đạt tối đa từ <strong>10,000 điểm</strong>. Đặc quyền VIP giảm 10% toàn menu.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script type="module" src="../src/modules/customer/profile/profile.js"></script>
+
+</body>
+</html>

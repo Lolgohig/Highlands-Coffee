@@ -1,0 +1,6 @@
+services/
+/services/
+**/services/*
+.env
+node_modules/
+.DS_Store
