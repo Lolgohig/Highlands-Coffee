@@ -1,0 +1,24 @@
+{
+  "name": "highlands-coffee-project-structure",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "gh-pages -d ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lolgohig/Highlands-Coffee.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Lolgohig/Highlands-Coffee/issues"
+  },
+  "homepage": "https://github.com/Lolgohig/Highlands-Coffee#readme",
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}
