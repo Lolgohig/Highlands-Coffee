@@ -850,14 +850,14 @@ async function initFallbackGeoData() {
 }
 
 /* =======================================================
-   SUBMIT ORDER & KẾT XUẤT LÊN FIRESTORE
+   SUBMIT ORDER - PHIÊN BẢN BẢO VỆ DANH MỤC TUYỆT ĐỐI
 ======================================================= */
 function attachOrderSubmission() {
   if (!btnSubmitOrder) return;
   btnSubmitOrder.onclick = async () => {
     if (localCartItems.length === 0) return;
 
-    // THÔNG BÁO VÀ CHẶN ĐẶT HÀNG NẾU KHÔNG ĐỦ LOYALTY POINTS (Giữ nguyên logic gốc của bạn)
+    // THÔNG BÁO VÀ CHẶN ĐẶT HÀNG NẾU KHÔNG ĐỦ LOYALTY POINTS
     if (currentUserPointsBalance < sumTotalPointsRequired) {
       alert(`⚠️ Không đủ điểm đổi quà! Bạn hiện có ${currentUserPointsBalance.toLocaleString('vi-VN')} loyaltyPoints. Đơn hàng yêu cầu ${sumTotalPointsRequired.toLocaleString('vi-VN')} điểm.`);
       return;
@@ -888,18 +888,62 @@ function attachOrderSubmission() {
     btnSubmitOrder.textContent = "⌛ ĐANG XỬ LÝ ĐƠN HÀNG...";
 
     try {
-      let finalItemsPayload = [...localCartItems];
+      let rawItemsPayload = [...localCartItems];
       if (activeCampaignData && activeCampaignData.type === "buy_x_get_y" && selectedGiftPayload) {
-        finalItemsPayload.push(selectedGiftPayload);
+        rawItemsPayload.push(selectedGiftPayload);
       }
       if (userMembershipLevel.toLowerCase().trim() === "diamond" && diamondGiftPayload) {
-        finalItemsPayload.push(diamondGiftPayload);
+        rawItemsPayload.push(diamondGiftPayload);
       }
+
+      // CHUẨN HÓA DANH MỤC: Quét mọi trường hợp có thể xảy ra để lấy chữ có nghĩa
+      const finalItemsPayload = rawItemsPayload.map(item => {
+        
+        let finalCategory = "";
+
+        // 1. Kiểm tra subCategoryName có hợp lệ không
+        if (item.subCategoryName && item.subCategoryName.trim() !== "") {
+          finalCategory = item.subCategoryName.trim();
+        } 
+        // 2. Nếu không, kiểm tra categoryName từ Object Item có hợp lệ không
+        else if (item.categoryName && item.categoryName.trim() !== "") {
+          finalCategory = item.categoryName.trim();
+        } 
+        // 3. Fallback thông minh: Đoán danh mục dựa trên từ khóa trong tên sản phẩm nếu data giỏ hàng mất sạch thuộc tính danh mục
+        else {
+          const prodName = (item.name || "").toLowerCase();
+          if (prodName.includes("freeze")) {
+            finalCategory = "Freeze";
+          } else if (prodName.includes("phin") || prodName.includes("espresso") || prodName.includes("americano") || prodName.includes("cà phê")) {
+            finalCategory = "Cà phê";
+          } else if (prodName.includes("trà")) {
+            finalCategory = "Trà";
+          } else if (prodName.includes("chanh") || prodName.includes("tắc") || prodName.includes("đá viên")) {
+            finalCategory = "Khác";
+          } else {
+            finalCategory = "Cà phê"; // Fallback tối thượng thay vì chuỗi rỗng
+          }
+        }
+        
+        return {
+          id: item.id || "",
+          name: item.name || "",
+          image: item.image || "",
+          price: item.price || 0,
+          quantity: item.quantity || 1,
+          size: item.size || "S",
+          isPointsItem: item.isPointsItem || false,
+          pointsRequired: item.pointsRequired || 0,
+          membershipDiscount: item.membershipDiscount || 0,
+          membershipLevel: item.membershipLevel || userMembershipLevel,
+          
+          // Đảm bảo ghi đè giá trị chữ có nghĩa vào đúng cấu trúc subCategoryName của Đơn hàng cũ
+          subCategoryName: finalCategory 
+        };
+      });
 
       const totalCombinedDiscount = activeDiscountValue + membershipDiscountValue;
       const finalDiscountApplied = Math.min(sumTotalCashBeforeDiscount, totalCombinedDiscount);
-
-      // CƠ CHẾ TÍCH LUỸ ĐIỂM (LOYALTY POINTS): Mỗi 10.000đ hóa đơn tiền mặt = +1 điểm thưởng
       const newEarnedPoints = Math.floor(finalCashToPay / 10000);
 
       const orderPayload = {
@@ -908,7 +952,7 @@ function attachOrderSubmission() {
         customerPhone: phone,
         shippingAddress: address,
         deliverySchedule: finalDeliveryTimeText, 
-        items: finalItemsPayload,
+        items: finalItemsPayload, 
         subtotalCash: sumTotalCashBeforeDiscount,
         shippingFee: calculatedShippingFee,
         discountPercentFromCampaign: activeCampaignData && activeCampaignData.type === "percentage" ? activeCampaignData.discountPercent : 0,
@@ -920,31 +964,38 @@ function attachOrderSubmission() {
         earnedPointsFromOrder: newEarnedPoints, 
         distanceKm: computedDistanceKm,
         status: "Pending", 
+        isPointsRewarded: false, 
         createdAt: new Date().toISOString()
       };
 
+      // 1. Lưu hóa đơn lên Firestore
       await addDoc(collection(db, "orders"), orderPayload);
 
-      // CẬP NHẬT LẠI VÍ ĐIỂM USER CHÍNH XÁC VÀO TRƯỜNG loyaltyPoints
+      // 2. CẬP NHẬT VÍ ĐIỂM USER (Chỉ trừ điểm quà, không cộng trước điểm thưởng)
       const userRef = doc(db, "users", currentUserAccount.uid);
-      const finalUpdatedPointsBalance = currentUserPointsBalance - sumTotalPointsRequired + newEarnedPoints;
+      const finalUpdatedPointsBalance = currentUserPointsBalance - sumTotalPointsRequired;
       
       await updateDoc(userRef, { 
         loyaltyPoints: finalUpdatedPointsBalance 
       });
 
       localStorage.removeItem("highlands_cart");
-      alert(`🎉 Đặt hàng thành công!\n- Bạn đã dùng: ${sumTotalPointsRequired.toLocaleString('vi-VN')} điểm đổi quà.\n- Bạn được tích luỹ thêm: +${newEarnedPoints} loyaltyPoints mới từ hóa đơn.`);
+      
+      if (sumTotalPointsRequired > 0) {
+        alert(`🎉 Đặt hàng thành công!\n- Bạn đã dùng: ${sumTotalPointsRequired.toLocaleString('vi-VN')} điểm đổi quà.\n- Điểm tích lũy (+${newEarnedPoints} điểm) đang chờ xử lý và sẽ cộng sau khi đơn hoàn thành.`);
+      } else {
+        alert(`🎉 Đặt hàng thành công!\n- Điểm tích lũy (+${newEarnedPoints} điểm) đang chờ xử lý và sẽ tự động cộng khi đơn hoàn thành.`);
+      }
+      
       window.location.reload();
 
     } catch (error) {
-      console.error(error);
+      console.error("Lỗi xử lý thanh toán hóa đơn:", error);
       btnSubmitOrder.removeAttribute("disabled");
       btnSubmitOrder.textContent = "TIẾN HÀNH ĐẶT HÀNG";
     }
   };
 }
-
 /* =======================================================
    TRUY VẤN LỊCH SỬ ĐƠN HÀNG ĐÃ ĐẶT
 ======================================================= */
@@ -999,3 +1050,4 @@ async function fetchUserOrdersHistory() {
     console.error(error);
   }
 }
+setupCartModule()
