@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadProductDetails(); // Xử lý bóc tách ID từ URL và render chi tiết sản phẩm + slide liên quan
 });
 
-/* ================= 1. AUTH & AVATAR LOGIC (ĐỒNG BỘ) ================= */
+/* ================= 1. AUTH & AVATAR LOGIC ================= */
 function initAuthLogic() {
     if (logoutBtn) {
         logoutBtn.onclick = async () => {
@@ -52,18 +52,38 @@ function initAuthLogic() {
     }
 
     onAuthStateChanged(auth, async (user) => {
-        if (!user) return;
+        // 1. CHẶN NẾU CHƯA ĐĂNG NHẬP: Nếu không tồn tại user, đá ngay về trang auth.html
+        if (!user) {
+            window.location.href = "auth.html";
+            return;
+        }
+
         try {
             const snap = await getDoc(doc(db, "users", user.uid));
-            if (snap.exists() && navbarAvatar) {
-                navbarAvatar.src = snap.data().avatar || "https://i.pravatar.cc/150";
+            if (!snap.exists()) {
+                // Phòng trường hợp user có bên Authentication nhưng bị xóa/không có bản ghi trong Firestore
+                window.location.href = "auth.html";
+                return;
             }
+
+            const userData = snap.data();
+
+            // 2. PHÂN QUYỀN ĐỒNG BỘ: Chỉ cho phép tài khoản có role là "user" ở lại trang này
+            if (userData.role !== "user") {
+                window.location.href = "auth.html";
+                return;
+            }
+
+            // 3. HIỂN THỊ AVATAR NẾU ĐỦ ĐIỀU KIỆN
+            if (navbarAvatar) {
+                navbarAvatar.src = userData.avatar || "https://i.pravatar.cc/150";
+            }
+            
         } catch (err) { 
-            console.error("Lỗi tải avatar hệ thống:", err); 
+            console.error("Lỗi tải thông tin xác thực hệ thống:", err); 
         }
     });
 }
-
 /* ================= 2. LOAD MEGA MENU (ĐỒNG BỘ) ================= */
 async function loadMegaMenu() {
     if (!megaMenu) return;

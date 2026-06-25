@@ -65,12 +65,16 @@ if (navbarAvatar && dropdownMenu) {
 }
 
 /* =======================================================
-   LOAD AVATAR
+   XÁC THỰC NGƯỜI DÙNG & TẢI AVATAR (AUTH GUARD & LOAD AVATAR)
 ======================================================= */
 
 onAuthStateChanged(auth, async (user) => {
 
-  if (!user) return;
+  // BƯỚC 1: Nếu chưa đăng nhập, đá ngay về auth.html
+  if (!user) {
+    window.location.href = "auth.html";
+    return;
+  }
 
   try {
 
@@ -78,17 +82,31 @@ onAuthStateChanged(auth, async (user) => {
       doc(db, "users", user.uid)
     );
 
-    if (!snap.exists()) return;
+    // BƯỚC 2: Nếu không tồn tại thông tin tài khoản, đá về auth.html
+    if (!snap.exists()) {
+      window.location.href = "auth.html";
+      return;
+    }
 
     const data = snap.data();
 
-    navbarAvatar.src =
-      data.avatar ||
-      "https://i.pravatar.cc/150";
+    // BƯỚC 3: Nếu đăng nhập rồi nhưng role KHÔNG PHẢI là "user", đá về auth.html
+    if (data.role !== "user") {
+      window.location.href = "auth.html";
+      return;
+    }
+
+    // BƯỚC 4: Nếu thỏa mãn là "user" hợp lệ, giữ nguyên giao diện và hiển thị ảnh đại diện
+    if (navbarAvatar) {
+      navbarAvatar.src =
+        data.avatar ||
+        "https://i.pravatar.cc/150";
+    }
 
   } catch (err) {
 
-    console.error(err);
+    console.error("Lỗi hệ thống kiểm tra phân quyền:", err);
+    window.location.href = "auth.html";
   }
 });
 
@@ -194,12 +212,14 @@ async function loadMegaMenu() {
     console.error("Lỗi đồng bộ cấu trúc Mega Menu hệ thống:", err);
   }
 }
+
 /* =======================================================
    FEATURED PRODUCTS
 ======================================================= */
 
 async function loadFeaturedProducts() {
 
+  if (!featuredMenu) return;
   featuredMenu.innerHTML = "";
 
   try {

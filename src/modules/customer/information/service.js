@@ -54,25 +54,40 @@ function initDropdownProfile() {
 }
 
 /* =======================================================
-   LOAD AVATAR USER
+   LOAD AVATAR USER & AUTH GUARD
 ======================================================= */
 
 onAuthStateChanged(auth, async (user) => {
-  if (!user) return;
+  // 1. CHẶN NẾU CHƯA ĐĂNG NHẬP: Nếu không có trạng thái đăng nhập, đẩy ngay về auth.html
+  if (!user) {
+    window.location.href = "auth.html";
+    return;
+  }
 
   try {
     const snap = await getDoc(doc(db, "users", user.uid));
-    if (!snap.exists()) return;
+    if (!snap.exists()) {
+      // Phòng trường hợp tài khoản Authentication hợp lệ nhưng không có bản ghi trong Firestore users
+      window.location.href = "auth.html";
+      return;
+    }
 
     const data = snap.data();
+
+    // 2. PHÂN QUYỀN TRUY CẬP: Chỉ cho phép tài khoản có vai trò "user" được ở lại trang này
+    if (data.role !== "user") {
+      window.location.href = "auth.html";
+      return;
+    }
+
+    // 3. HIỂN THỊ THÔNG TIN AVATAR KHI ĐÃ ĐẠT ĐỦ ĐIỀU KIỆN
     if (navbarAvatar) {
       navbarAvatar.src = data.avatar || "https://i.pravatar.cc/150";
     }
   } catch (err) {
-    console.error("Lỗi khi tải avatar người dùng:", err);
+    console.error("Lỗi khi tải dữ liệu xác thực & avatar người dùng:", err);
   }
 });
-
 /* =======================================================
    LOGOUT SYSTEM
 ======================================================= */
