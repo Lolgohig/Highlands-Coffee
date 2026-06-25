@@ -10,37 +10,72 @@ const logoutBtn = document.getElementById("logoutBtn");
 
 /* INIT */
 document.addEventListener("DOMContentLoaded", () => {
-    initAuthLogic();      // Xử lý Avatar & Logout
+    initAuthLogic();      // Xử lý Avatar, Logout & AuthGuard bảo mật
     loadMegaMenu();       // Xử lý Menu
     initScrollReveal();   // Xử lý hiệu ứng cuộn
     loadNews();           // Xử lý tin tức
 });
 
-/* 1. AUTH & AVATAR LOGIC */
+/* 1. AUTH & AVATAR LOGIC (Đã tích hợp AuthGuard chuẩn giống job.js) */
 function initAuthLogic() {
     // Logout
     if (logoutBtn) {
         logoutBtn.onclick = async () => {
-            await signOut(auth);
-            window.location.href = "auth.html";
+            try {
+                await signOut(auth);
+                window.location.href = "auth.html";
+            } catch (err) {
+                console.error(err);
+                alert(err.message);
+            }
         };
     }
 
     // Avatar & Dropdown
     if (navbarAvatar && dropdownMenu) {
-        navbarAvatar.onclick = (e) => { e.stopPropagation(); dropdownMenu.classList.toggle("show"); };
-        window.onclick = (e) => { if (!e.target.closest(".profile-dropdown")) dropdownMenu.classList.remove("show"); };
+        navbarAvatar.onclick = (e) => { 
+            e.stopPropagation(); 
+            dropdownMenu.classList.toggle("show"); 
+        };
+        window.onclick = (e) => { 
+            if (!e.target.closest(".profile-dropdown")) dropdownMenu.classList.remove("show"); 
+        };
     }
 
-    // Load Avatar từ Firestore
+    // Luồng kiểm tra đăng nhập, phân quyền & tải dữ liệu User
     onAuthStateChanged(auth, async (user) => {
-        if (!user) return;
+        // BƯỚC 1: Nếu chưa đăng nhập, đá ngay về auth.html
+        if (!user) {
+            window.location.href = "auth.html";
+            return;
+        }
+
         try {
             const snap = await getDoc(doc(db, "users", user.uid));
-            if (snap.exists() && navbarAvatar) {
-                navbarAvatar.src = snap.data().avatar || "https://i.pravatar.cc/150";
+            
+            // BƯỚC 2: Nếu không tồn tại thông tin tài khoản, đá về auth.html
+            if (!snap.exists()) {
+                window.location.href = "auth.html";
+                return;
             }
-        } catch (err) { console.error("Lỗi tải avatar:", err); }
+
+            const data = snap.data();
+
+            // BƯỚC 3: Nếu đăng nhập rồi nhưng role KHÔNG PHẢI là "user", đá về auth.html
+            if (data.role !== "user") {
+                window.location.href = "auth.html";
+                return;
+            }
+
+            // BƯỚC 4: Hiển thị avatar khi các điều kiện bảo mật trên đều hợp lệ
+            if (navbarAvatar) {
+                navbarAvatar.src = data.avatar || "https://i.pravatar.cc/150";
+            }
+
+        } catch (err) {
+            // Chỉ log lỗi ra console, không tự ý chuyển hướng khi gặp lỗi đọc dữ liệu/mạng
+            console.error("Lỗi hệ thống kiểm tra thông tin tài khoản:", err);
+        }
     });
 }
 
